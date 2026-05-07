@@ -327,11 +327,11 @@ def _compute_coarse_transform(
     logger.debug(f"Coarse best score={best_score:.4f}")
     return best_M
 
-
 def _detect_and_match_features(
     image1: np.ndarray,
     image2: np.ndarray,
 ) -> tuple[list, list, np.ndarray, np.ndarray, list]:
+
     from .constants import ORB_N_FEATURES, ORB_SCALE_FACTOR, ORB_N_LEVELS
 
     orb = cv2.ORB_create(
@@ -344,20 +344,25 @@ def _detect_and_match_features(
     kp2, des2 = orb.detectAndCompute(image2, None)
 
     if des1 is None or des2 is None:
+
         logger.debug(
             f"No descriptors found: des1={des1 is not None}, des2={des2 is not None}"
         )
+
         return kp1, kp2, des1, des2, []
 
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
     matches = bf.match(des1, des2)
+
     matches = sorted(matches, key=lambda m: m.distance)
 
-    logger.debug(f"ORB detected {len(kp1)} and {len(kp2)} keypoints, {len(matches)} matches")
+    logger.debug(
+        f"ORB detected {len(kp1)} and {len(kp2)} keypoints, "
+        f"{len(matches)} matches"
+    )
 
     return kp1, kp2, des1, des2, matches
-
 
 def _estimate_similarity(
     keypoints1: list,
@@ -542,6 +547,7 @@ def apply_transform(
     matrix: np.ndarray,
     output_shape: Optional[tuple[int, int]] = None,
 ) -> np.ndarray:
+
     if output_shape is None:
         output_shape = edge_map.shape
 
@@ -549,7 +555,7 @@ def apply_transform(
         edge_map,
         matrix,
         (output_shape[1], output_shape[0]),
-        flags=cv2.INTER_LINEAR,
+        flags=cv2.INTER_NEAREST,
         borderMode=cv2.BORDER_CONSTANT,
         borderValue=0
     )
