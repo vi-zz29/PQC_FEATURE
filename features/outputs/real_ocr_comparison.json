@@ -1,0 +1,1619 @@
+[
+    {
+        "image": "real1.png",
+        "size": {
+            "w": 921,
+            "h": 1176
+        },
+        "scale_px_per_mm": 11.98,
+        "total_contours": 15,
+        "circular_count": 2,
+        "matched_count": 2,
+        "matches": [
+            {
+                "contour_id": 71,
+                "shape": "circle",
+                "circularity": 0.8783,
+                "eq_diameter_px": 23.64,
+                "eq_diameter_mm": 1.973,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.027,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 884,
+                    "y": 1290
+                }
+            },
+            {
+                "contour_id": 154,
+                "shape": "circle",
+                "circularity": 0.8762,
+                "eq_diameter_px": 23.96,
+                "eq_diameter_mm": 2.0,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.0,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 882,
+                    "y": 958
+                }
+            },
+            {
+                "contour_id": 190,
+                "shape": "ellipse",
+                "circularity": 0.6168,
+                "eq_diameter_px": 321.98,
+                "eq_diameter_mm": 26.876,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 1080,
+                    "y": 1055
+                }
+            }
+        ]
+    },
+    {
+        "image": "real2.png",
+        "size": {
+            "w": 666,
+            "h": 956
+        },
+        "scale_px_per_mm": 20.27,
+        "total_contours": 65,
+        "circular_count": 29,
+        "matched_count": 15,
+        "matches": [
+            {
+                "contour_id": 33,
+                "shape": "ellipse",
+                "circularity": 0.6822,
+                "eq_diameter_px": 10.16,
+                "eq_diameter_mm": 0.501,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 648,
+                    "y": 1213
+                }
+            },
+            {
+                "contour_id": 53,
+                "shape": "ellipse",
+                "circularity": 0.7961,
+                "eq_diameter_px": 22.44,
+                "eq_diameter_mm": 1.107,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 706,
+                    "y": 1205
+                }
+            },
+            {
+                "contour_id": 61,
+                "shape": "ellipse",
+                "circularity": 0.774,
+                "eq_diameter_px": 37.89,
+                "eq_diameter_mm": 1.869,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.131,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 707,
+                    "y": 1204
+                }
+            },
+            {
+                "contour_id": 62,
+                "shape": "circle",
+                "circularity": 0.8797,
+                "eq_diameter_px": 38.28,
+                "eq_diameter_mm": 1.889,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.111,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 602,
+                    "y": 1205
+                }
+            },
+            {
+                "contour_id": 75,
+                "shape": "circle",
+                "circularity": 0.8212,
+                "eq_diameter_px": 24.42,
+                "eq_diameter_mm": 1.205,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 534,
+                    "y": 1187
+                }
+            },
+            {
+                "contour_id": 76,
+                "shape": "circle",
+                "circularity": 0.8894,
+                "eq_diameter_px": 13.47,
+                "eq_diameter_mm": 0.665,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 792,
+                    "y": 1179
+                }
+            },
+            {
+                "contour_id": 100,
+                "shape": "circle",
+                "circularity": 0.8978,
+                "eq_diameter_px": 33.7,
+                "eq_diameter_mm": 1.663,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.337,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 792,
+                    "y": 1179
+                }
+            },
+            {
+                "contour_id": 159,
+                "shape": "circle",
+                "circularity": 0.8069,
+                "eq_diameter_px": 20.37,
+                "eq_diameter_mm": 1.005,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 457,
+                    "y": 1145
+                }
+            },
+            {
+                "contour_id": 188,
+                "shape": "circle",
+                "circularity": 0.8946,
+                "eq_diameter_px": 40.31,
+                "eq_diameter_mm": 1.989,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.011,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 857,
+                    "y": 1140
+                }
+            },
+            {
+                "contour_id": 487,
+                "shape": "circle",
+                "circularity": 0.8303,
+                "eq_diameter_px": 17.63,
+                "eq_diameter_mm": 0.87,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 331,
+                    "y": 957
+                }
+            },
+            {
+                "contour_id": 502,
+                "shape": "circle",
+                "circularity": 0.8626,
+                "eq_diameter_px": 39.23,
+                "eq_diameter_mm": 1.935,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.065,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 328,
+                    "y": 955
+                }
+            },
+            {
+                "contour_id": 572,
+                "shape": "circle",
+                "circularity": 0.8939,
+                "eq_diameter_px": 42.27,
+                "eq_diameter_mm": 2.085,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.085,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 989,
+                    "y": 892
+                }
+            },
+            {
+                "contour_id": 603,
+                "shape": "circle",
+                "circularity": 0.8795,
+                "eq_diameter_px": 11.28,
+                "eq_diameter_mm": 0.556,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 321,
+                    "y": 839
+                }
+            },
+            {
+                "contour_id": 618,
+                "shape": "circle",
+                "circularity": 0.8659,
+                "eq_diameter_px": 35.47,
+                "eq_diameter_mm": 1.75,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.25,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 321,
+                    "y": 839
+                }
+            },
+            {
+                "contour_id": 638,
+                "shape": "circle",
+                "circularity": 0.8839,
+                "eq_diameter_px": 27.83,
+                "eq_diameter_mm": 1.373,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 986,
+                    "y": 815
+                }
+            },
+            {
+                "contour_id": 669,
+                "shape": "ellipse",
+                "circularity": 0.6344,
+                "eq_diameter_px": 189.01,
+                "eq_diameter_mm": 9.325,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 652,
+                    "y": 872
+                }
+            },
+            {
+                "contour_id": 680,
+                "shape": "circle",
+                "circularity": 0.8947,
+                "eq_diameter_px": 204.56,
+                "eq_diameter_mm": 10.092,
+                "matched_ocr_dia": 10.0,
+                "error_mm": 0.092,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 652,
+                    "y": 872
+                }
+            },
+            {
+                "contour_id": 697,
+                "shape": "circle",
+                "circularity": 0.8688,
+                "eq_diameter_px": 16.35,
+                "eq_diameter_mm": 0.807,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 339,
+                    "y": 768
+                }
+            },
+            {
+                "contour_id": 729,
+                "shape": "circle",
+                "circularity": 0.8566,
+                "eq_diameter_px": 37.6,
+                "eq_diameter_mm": 1.855,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.145,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 338,
+                    "y": 765
+                }
+            },
+            {
+                "contour_id": 781,
+                "shape": "circle",
+                "circularity": 0.9022,
+                "eq_diameter_px": 41.69,
+                "eq_diameter_mm": 2.057,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.057,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 958,
+                    "y": 732
+                }
+            },
+            {
+                "contour_id": 848,
+                "shape": "circle",
+                "circularity": 0.8405,
+                "eq_diameter_px": 18.25,
+                "eq_diameter_mm": 0.9,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 399,
+                    "y": 663
+                }
+            },
+            {
+                "contour_id": 850,
+                "shape": "ellipse",
+                "circularity": 0.7916,
+                "eq_diameter_px": 21.41,
+                "eq_diameter_mm": 1.056,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 911,
+                    "y": 660
+                }
+            },
+            {
+                "contour_id": 865,
+                "shape": "ellipse",
+                "circularity": 0.6224,
+                "eq_diameter_px": 39.27,
+                "eq_diameter_mm": 1.937,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.063,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 397,
+                    "y": 660
+                }
+            },
+            {
+                "contour_id": 867,
+                "shape": "circle",
+                "circularity": 0.9046,
+                "eq_diameter_px": 40.89,
+                "eq_diameter_mm": 2.017,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.017,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 912,
+                    "y": 658
+                }
+            },
+            {
+                "contour_id": 900,
+                "shape": "circle",
+                "circularity": 0.8531,
+                "eq_diameter_px": 28.01,
+                "eq_diameter_mm": 1.382,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 441,
+                    "y": 615
+                }
+            },
+            {
+                "contour_id": 904,
+                "shape": "circle",
+                "circularity": 0.9112,
+                "eq_diameter_px": 11.91,
+                "eq_diameter_mm": 0.588,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 847,
+                    "y": 599
+                }
+            },
+            {
+                "contour_id": 925,
+                "shape": "circle",
+                "circularity": 0.8938,
+                "eq_diameter_px": 37.13,
+                "eq_diameter_mm": 1.832,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.168,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 847,
+                    "y": 598
+                }
+            },
+            {
+                "contour_id": 927,
+                "shape": "ellipse",
+                "circularity": 0.6193,
+                "eq_diameter_px": 15.08,
+                "eq_diameter_mm": 0.744,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 653,
+                    "y": 589
+                }
+            },
+            {
+                "contour_id": 937,
+                "shape": "circle",
+                "circularity": 0.8156,
+                "eq_diameter_px": 16.49,
+                "eq_diameter_mm": 0.814,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 534,
+                    "y": 567
+                }
+            },
+            {
+                "contour_id": 941,
+                "shape": "circle",
+                "circularity": 0.8015,
+                "eq_diameter_px": 18.76,
+                "eq_diameter_mm": 0.926,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 770,
+                    "y": 563
+                }
+            },
+            {
+                "contour_id": 946,
+                "shape": "circle",
+                "circularity": 0.8951,
+                "eq_diameter_px": 40.07,
+                "eq_diameter_mm": 1.977,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.023,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 531,
+                    "y": 562
+                }
+            },
+            {
+                "contour_id": 947,
+                "shape": "circle",
+                "circularity": 0.8708,
+                "eq_diameter_px": 40.54,
+                "eq_diameter_mm": 2.0,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.0,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 770,
+                    "y": 558
+                }
+            },
+            {
+                "contour_id": 948,
+                "shape": "ellipse",
+                "circularity": 0.7953,
+                "eq_diameter_px": 11.7,
+                "eq_diameter_mm": 0.577,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 657,
+                    "y": 534
+                }
+            }
+        ]
+    },
+    {
+        "image": "real3.png",
+        "size": {
+            "w": 1200,
+            "h": 1600
+        },
+        "scale_px_per_mm": null,
+        "total_contours": 32,
+        "circular_count": 0,
+        "matched_count": 0,
+        "matches": [
+            {
+                "contour_id": 761,
+                "shape": "ellipse",
+                "circularity": 0.6091,
+                "eq_diameter_px": 686.09,
+                "eq_diameter_mm": null,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 1078,
+                    "y": 1655
+                }
+            },
+            {
+                "contour_id": 765,
+                "shape": "ellipse",
+                "circularity": 0.6615,
+                "eq_diameter_px": 703.97,
+                "eq_diameter_mm": null,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 1078,
+                    "y": 1657
+                }
+            },
+            {
+                "contour_id": 1019,
+                "shape": "ellipse",
+                "circularity": 0.6064,
+                "eq_diameter_px": 10.16,
+                "eq_diameter_mm": null,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 2127,
+                    "y": 295
+                }
+            }
+        ]
+    },
+    {
+        "image": "real4.png",
+        "size": {
+            "w": 899,
+            "h": 1319
+        },
+        "scale_px_per_mm": 6.5114,
+        "total_contours": 54,
+        "circular_count": 7,
+        "matched_count": 7,
+        "matches": [
+            {
+                "contour_id": 47,
+                "shape": "ellipse",
+                "circularity": 0.7766,
+                "eq_diameter_px": 25.83,
+                "eq_diameter_mm": 3.967,
+                "matched_ocr_dia": 4.0,
+                "error_mm": 0.033,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 718,
+                    "y": 1725
+                }
+            },
+            {
+                "contour_id": 54,
+                "shape": "circle",
+                "circularity": 0.8884,
+                "eq_diameter_px": 46.49,
+                "eq_diameter_mm": 7.14,
+                "matched_ocr_dia": 7.0,
+                "error_mm": 0.14,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 719,
+                    "y": 1726
+                }
+            },
+            {
+                "contour_id": 1153,
+                "shape": "circle",
+                "circularity": 0.8873,
+                "eq_diameter_px": 28.21,
+                "eq_diameter_mm": 4.332,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.168,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 1355,
+                    "y": 1177
+                }
+            },
+            {
+                "contour_id": 1176,
+                "shape": "circle",
+                "circularity": 0.876,
+                "eq_diameter_px": 45.81,
+                "eq_diameter_mm": 7.035,
+                "matched_ocr_dia": 7.0,
+                "error_mm": 0.035,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 1356,
+                    "y": 1177
+                }
+            },
+            {
+                "contour_id": 1435,
+                "shape": "circle",
+                "circularity": 0.8232,
+                "eq_diameter_px": 11.42,
+                "eq_diameter_mm": 1.754,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.246,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 1224,
+                    "y": 911
+                }
+            },
+            {
+                "contour_id": 1438,
+                "shape": "circle",
+                "circularity": 0.8463,
+                "eq_diameter_px": 21.87,
+                "eq_diameter_mm": 3.359,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 568,
+                    "y": 908
+                }
+            },
+            {
+                "contour_id": 1441,
+                "shape": "circle",
+                "circularity": 0.8931,
+                "eq_diameter_px": 45.58,
+                "eq_diameter_mm": 7.0,
+                "matched_ocr_dia": 7.0,
+                "error_mm": 0.0,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 567,
+                    "y": 907
+                }
+            },
+            {
+                "contour_id": 1451,
+                "shape": "ellipse",
+                "circularity": 0.717,
+                "eq_diameter_px": 11.42,
+                "eq_diameter_mm": 1.754,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.246,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 1145,
+                    "y": 843
+                }
+            }
+        ]
+    },
+    {
+        "image": "real5.png",
+        "size": {
+            "w": 826,
+            "h": 703
+        },
+        "scale_px_per_mm": 2.4111,
+        "total_contours": 314,
+        "circular_count": 4,
+        "matched_count": 22,
+        "matches": [
+            {
+                "contour_id": 246,
+                "shape": "ellipse",
+                "circularity": 0.649,
+                "eq_diameter_px": 14.07,
+                "eq_diameter_mm": 5.835,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 783,
+                    "y": 1255
+                }
+            },
+            {
+                "contour_id": 286,
+                "shape": "ellipse",
+                "circularity": 0.6023,
+                "eq_diameter_px": 10.67,
+                "eq_diameter_mm": 4.425,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.075,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 750,
+                    "y": 1226
+                }
+            },
+            {
+                "contour_id": 433,
+                "shape": "polygon",
+                "circularity": 0.5995,
+                "eq_diameter_px": 15.18,
+                "eq_diameter_mm": 6.296,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 898,
+                    "y": 1156
+                }
+            },
+            {
+                "contour_id": 451,
+                "shape": "polygon",
+                "circularity": 0.5956,
+                "eq_diameter_px": 10.62,
+                "eq_diameter_mm": 4.405,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.095,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 842,
+                    "y": 1145
+                }
+            },
+            {
+                "contour_id": 455,
+                "shape": "circle",
+                "circularity": 0.8617,
+                "eq_diameter_px": 10.85,
+                "eq_diameter_mm": 4.5,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.0,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 1017,
+                    "y": 1142
+                }
+            },
+            {
+                "contour_id": 482,
+                "shape": "ellipse",
+                "circularity": 0.6319,
+                "eq_diameter_px": 10.28,
+                "eq_diameter_mm": 4.264,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.236,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 563,
+                    "y": 1126
+                }
+            },
+            {
+                "contour_id": 486,
+                "shape": "ellipse",
+                "circularity": 0.6284,
+                "eq_diameter_px": 14.47,
+                "eq_diameter_mm": 6.001,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 718,
+                    "y": 1126
+                }
+            },
+            {
+                "contour_id": 521,
+                "shape": "polygon",
+                "circularity": 0.5651,
+                "eq_diameter_px": 13.33,
+                "eq_diameter_mm": 5.529,
+                "matched_ocr_dia": 5.2,
+                "error_mm": 0.329,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 888,
+                    "y": 1102
+                }
+            },
+            {
+                "contour_id": 643,
+                "shape": "polygon",
+                "circularity": 0.553,
+                "eq_diameter_px": 17.7,
+                "eq_diameter_mm": 7.341,
+                "matched_ocr_dia": 7.0,
+                "error_mm": 0.341,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 597,
+                    "y": 1054
+                }
+            },
+            {
+                "contour_id": 696,
+                "shape": "ellipse",
+                "circularity": 0.6696,
+                "eq_diameter_px": 12.67,
+                "eq_diameter_mm": 5.255,
+                "matched_ocr_dia": 5.2,
+                "error_mm": 0.055,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 772,
+                    "y": 1024
+                }
+            },
+            {
+                "contour_id": 707,
+                "shape": "ellipse",
+                "circularity": 0.7617,
+                "eq_diameter_px": 12.79,
+                "eq_diameter_mm": 5.305,
+                "matched_ocr_dia": 5.2,
+                "error_mm": 0.105,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 873,
+                    "y": 1013
+                }
+            },
+            {
+                "contour_id": 711,
+                "shape": "ellipse",
+                "circularity": 0.6628,
+                "eq_diameter_px": 11.2,
+                "eq_diameter_mm": 4.645,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.145,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 909,
+                    "y": 1012
+                }
+            },
+            {
+                "contour_id": 943,
+                "shape": "polygon",
+                "circularity": 0.5858,
+                "eq_diameter_px": 14.95,
+                "eq_diameter_mm": 6.2,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 869,
+                    "y": 913
+                }
+            },
+            {
+                "contour_id": 956,
+                "shape": "ellipse",
+                "circularity": 0.6559,
+                "eq_diameter_px": 15.82,
+                "eq_diameter_mm": 6.561,
+                "matched_ocr_dia": 7.0,
+                "error_mm": 0.439,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 850,
+                    "y": 911
+                }
+            },
+            {
+                "contour_id": 964,
+                "shape": "ellipse",
+                "circularity": 0.7109,
+                "eq_diameter_px": 12.51,
+                "eq_diameter_mm": 5.188,
+                "matched_ocr_dia": 5.2,
+                "error_mm": 0.012,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 934,
+                    "y": 898
+                }
+            },
+            {
+                "contour_id": 998,
+                "shape": "ellipse",
+                "circularity": 0.6239,
+                "eq_diameter_px": 10.09,
+                "eq_diameter_mm": 4.185,
+                "matched_ocr_dia": 4.0,
+                "error_mm": 0.185,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 682,
+                    "y": 885
+                }
+            },
+            {
+                "contour_id": 1104,
+                "shape": "circle",
+                "circularity": 0.8139,
+                "eq_diameter_px": 10.28,
+                "eq_diameter_mm": 4.264,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.236,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 662,
+                    "y": 831
+                }
+            },
+            {
+                "contour_id": 1154,
+                "shape": "ellipse",
+                "circularity": 0.6155,
+                "eq_diameter_px": 10.65,
+                "eq_diameter_mm": 4.417,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.083,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 631,
+                    "y": 811
+                }
+            },
+            {
+                "contour_id": 1168,
+                "shape": "polygon",
+                "circularity": 0.5868,
+                "eq_diameter_px": 15.82,
+                "eq_diameter_mm": 6.561,
+                "matched_ocr_dia": 7.0,
+                "error_mm": 0.439,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 606,
+                    "y": 807
+                }
+            },
+            {
+                "contour_id": 1241,
+                "shape": "ellipse",
+                "circularity": 0.675,
+                "eq_diameter_px": 11.08,
+                "eq_diameter_mm": 4.595,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.095,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 576,
+                    "y": 769
+                }
+            },
+            {
+                "contour_id": 1291,
+                "shape": "polygon",
+                "circularity": 0.5839,
+                "eq_diameter_px": 11.2,
+                "eq_diameter_mm": 4.645,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.145,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 707,
+                    "y": 741
+                }
+            },
+            {
+                "contour_id": 1303,
+                "shape": "circle",
+                "circularity": 0.8366,
+                "eq_diameter_px": 10.76,
+                "eq_diameter_mm": 4.463,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.037,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 630,
+                    "y": 731
+                }
+            },
+            {
+                "contour_id": 1982,
+                "shape": "ellipse",
+                "circularity": 0.6068,
+                "eq_diameter_px": 12.96,
+                "eq_diameter_mm": 5.375,
+                "matched_ocr_dia": 5.2,
+                "error_mm": 0.175,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 612,
+                    "y": 454
+                }
+            },
+            {
+                "contour_id": 2000,
+                "shape": "ellipse",
+                "circularity": 0.6027,
+                "eq_diameter_px": 10.82,
+                "eq_diameter_mm": 4.488,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.012,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 742,
+                    "y": 445
+                }
+            },
+            {
+                "contour_id": 2688,
+                "shape": "polygon",
+                "circularity": 0.5931,
+                "eq_diameter_px": 10.94,
+                "eq_diameter_mm": 4.537,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.037,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 727,
+                    "y": 217
+                }
+            },
+            {
+                "contour_id": 2803,
+                "shape": "ellipse",
+                "circularity": 0.7169,
+                "eq_diameter_px": 10.28,
+                "eq_diameter_mm": 4.264,
+                "matched_ocr_dia": 4.5,
+                "error_mm": 0.236,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 880,
+                    "y": 78
+                }
+            }
+        ]
+    },
+    {
+        "image": "real.jpeg",
+        "size": {
+            "w": 921,
+            "h": 1176
+        },
+        "scale_px_per_mm": 11.98,
+        "total_contours": 15,
+        "circular_count": 2,
+        "matched_count": 2,
+        "matches": [
+            {
+                "contour_id": 71,
+                "shape": "circle",
+                "circularity": 0.8783,
+                "eq_diameter_px": 23.64,
+                "eq_diameter_mm": 1.973,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.027,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 884,
+                    "y": 1290
+                }
+            },
+            {
+                "contour_id": 154,
+                "shape": "circle",
+                "circularity": 0.8762,
+                "eq_diameter_px": 23.96,
+                "eq_diameter_mm": 2.0,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.0,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 882,
+                    "y": 958
+                }
+            },
+            {
+                "contour_id": 190,
+                "shape": "ellipse",
+                "circularity": 0.6168,
+                "eq_diameter_px": 321.98,
+                "eq_diameter_mm": 26.876,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 1080,
+                    "y": 1055
+                }
+            }
+        ]
+    },
+    {
+        "image": "real1.jpeg",
+        "size": {
+            "w": 666,
+            "h": 956
+        },
+        "scale_px_per_mm": 20.27,
+        "total_contours": 65,
+        "circular_count": 29,
+        "matched_count": 15,
+        "matches": [
+            {
+                "contour_id": 33,
+                "shape": "ellipse",
+                "circularity": 0.6822,
+                "eq_diameter_px": 10.16,
+                "eq_diameter_mm": 0.501,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 648,
+                    "y": 1213
+                }
+            },
+            {
+                "contour_id": 53,
+                "shape": "ellipse",
+                "circularity": 0.7961,
+                "eq_diameter_px": 22.44,
+                "eq_diameter_mm": 1.107,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 706,
+                    "y": 1205
+                }
+            },
+            {
+                "contour_id": 61,
+                "shape": "ellipse",
+                "circularity": 0.774,
+                "eq_diameter_px": 37.89,
+                "eq_diameter_mm": 1.869,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.131,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 707,
+                    "y": 1204
+                }
+            },
+            {
+                "contour_id": 62,
+                "shape": "circle",
+                "circularity": 0.8797,
+                "eq_diameter_px": 38.28,
+                "eq_diameter_mm": 1.889,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.111,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 602,
+                    "y": 1205
+                }
+            },
+            {
+                "contour_id": 75,
+                "shape": "circle",
+                "circularity": 0.8212,
+                "eq_diameter_px": 24.42,
+                "eq_diameter_mm": 1.205,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 534,
+                    "y": 1187
+                }
+            },
+            {
+                "contour_id": 76,
+                "shape": "circle",
+                "circularity": 0.8894,
+                "eq_diameter_px": 13.47,
+                "eq_diameter_mm": 0.665,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 792,
+                    "y": 1179
+                }
+            },
+            {
+                "contour_id": 100,
+                "shape": "circle",
+                "circularity": 0.8978,
+                "eq_diameter_px": 33.7,
+                "eq_diameter_mm": 1.663,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.337,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 792,
+                    "y": 1179
+                }
+            },
+            {
+                "contour_id": 159,
+                "shape": "circle",
+                "circularity": 0.8069,
+                "eq_diameter_px": 20.37,
+                "eq_diameter_mm": 1.005,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 457,
+                    "y": 1145
+                }
+            },
+            {
+                "contour_id": 188,
+                "shape": "circle",
+                "circularity": 0.8946,
+                "eq_diameter_px": 40.31,
+                "eq_diameter_mm": 1.989,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.011,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 857,
+                    "y": 1140
+                }
+            },
+            {
+                "contour_id": 487,
+                "shape": "circle",
+                "circularity": 0.8303,
+                "eq_diameter_px": 17.63,
+                "eq_diameter_mm": 0.87,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 331,
+                    "y": 957
+                }
+            },
+            {
+                "contour_id": 502,
+                "shape": "circle",
+                "circularity": 0.8626,
+                "eq_diameter_px": 39.23,
+                "eq_diameter_mm": 1.935,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.065,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 328,
+                    "y": 955
+                }
+            },
+            {
+                "contour_id": 572,
+                "shape": "circle",
+                "circularity": 0.8939,
+                "eq_diameter_px": 42.27,
+                "eq_diameter_mm": 2.085,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.085,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 989,
+                    "y": 892
+                }
+            },
+            {
+                "contour_id": 603,
+                "shape": "circle",
+                "circularity": 0.8795,
+                "eq_diameter_px": 11.28,
+                "eq_diameter_mm": 0.556,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 321,
+                    "y": 839
+                }
+            },
+            {
+                "contour_id": 618,
+                "shape": "circle",
+                "circularity": 0.8659,
+                "eq_diameter_px": 35.47,
+                "eq_diameter_mm": 1.75,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.25,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 321,
+                    "y": 839
+                }
+            },
+            {
+                "contour_id": 638,
+                "shape": "circle",
+                "circularity": 0.8839,
+                "eq_diameter_px": 27.83,
+                "eq_diameter_mm": 1.373,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 986,
+                    "y": 815
+                }
+            },
+            {
+                "contour_id": 669,
+                "shape": "ellipse",
+                "circularity": 0.6344,
+                "eq_diameter_px": 189.01,
+                "eq_diameter_mm": 9.325,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 652,
+                    "y": 872
+                }
+            },
+            {
+                "contour_id": 680,
+                "shape": "circle",
+                "circularity": 0.8947,
+                "eq_diameter_px": 204.56,
+                "eq_diameter_mm": 10.092,
+                "matched_ocr_dia": 10.0,
+                "error_mm": 0.092,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 652,
+                    "y": 872
+                }
+            },
+            {
+                "contour_id": 697,
+                "shape": "circle",
+                "circularity": 0.8688,
+                "eq_diameter_px": 16.35,
+                "eq_diameter_mm": 0.807,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 339,
+                    "y": 768
+                }
+            },
+            {
+                "contour_id": 729,
+                "shape": "circle",
+                "circularity": 0.8566,
+                "eq_diameter_px": 37.6,
+                "eq_diameter_mm": 1.855,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.145,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 338,
+                    "y": 765
+                }
+            },
+            {
+                "contour_id": 781,
+                "shape": "circle",
+                "circularity": 0.9022,
+                "eq_diameter_px": 41.69,
+                "eq_diameter_mm": 2.057,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.057,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 958,
+                    "y": 732
+                }
+            },
+            {
+                "contour_id": 848,
+                "shape": "circle",
+                "circularity": 0.8405,
+                "eq_diameter_px": 18.25,
+                "eq_diameter_mm": 0.9,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 399,
+                    "y": 663
+                }
+            },
+            {
+                "contour_id": 850,
+                "shape": "ellipse",
+                "circularity": 0.7916,
+                "eq_diameter_px": 21.41,
+                "eq_diameter_mm": 1.056,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 911,
+                    "y": 660
+                }
+            },
+            {
+                "contour_id": 865,
+                "shape": "ellipse",
+                "circularity": 0.6224,
+                "eq_diameter_px": 39.27,
+                "eq_diameter_mm": 1.937,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.063,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 397,
+                    "y": 660
+                }
+            },
+            {
+                "contour_id": 867,
+                "shape": "circle",
+                "circularity": 0.9046,
+                "eq_diameter_px": 40.89,
+                "eq_diameter_mm": 2.017,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.017,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 912,
+                    "y": 658
+                }
+            },
+            {
+                "contour_id": 900,
+                "shape": "circle",
+                "circularity": 0.8531,
+                "eq_diameter_px": 28.01,
+                "eq_diameter_mm": 1.382,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 441,
+                    "y": 615
+                }
+            },
+            {
+                "contour_id": 904,
+                "shape": "circle",
+                "circularity": 0.9112,
+                "eq_diameter_px": 11.91,
+                "eq_diameter_mm": 0.588,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 847,
+                    "y": 599
+                }
+            },
+            {
+                "contour_id": 925,
+                "shape": "circle",
+                "circularity": 0.8938,
+                "eq_diameter_px": 37.13,
+                "eq_diameter_mm": 1.832,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.168,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 847,
+                    "y": 598
+                }
+            },
+            {
+                "contour_id": 927,
+                "shape": "ellipse",
+                "circularity": 0.6193,
+                "eq_diameter_px": 15.08,
+                "eq_diameter_mm": 0.744,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 653,
+                    "y": 589
+                }
+            },
+            {
+                "contour_id": 937,
+                "shape": "circle",
+                "circularity": 0.8156,
+                "eq_diameter_px": 16.49,
+                "eq_diameter_mm": 0.814,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 534,
+                    "y": 567
+                }
+            },
+            {
+                "contour_id": 941,
+                "shape": "circle",
+                "circularity": 0.8015,
+                "eq_diameter_px": 18.76,
+                "eq_diameter_mm": 0.926,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 770,
+                    "y": 563
+                }
+            },
+            {
+                "contour_id": 946,
+                "shape": "circle",
+                "circularity": 0.8951,
+                "eq_diameter_px": 40.07,
+                "eq_diameter_mm": 1.977,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.023,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 531,
+                    "y": 562
+                }
+            },
+            {
+                "contour_id": 947,
+                "shape": "circle",
+                "circularity": 0.8708,
+                "eq_diameter_px": 40.54,
+                "eq_diameter_mm": 2.0,
+                "matched_ocr_dia": 2.0,
+                "error_mm": 0.0,
+                "status": "MATCH",
+                "centroid": {
+                    "x": 770,
+                    "y": 558
+                }
+            },
+            {
+                "contour_id": 948,
+                "shape": "ellipse",
+                "circularity": 0.7953,
+                "eq_diameter_px": 11.7,
+                "eq_diameter_mm": 0.577,
+                "matched_ocr_dia": null,
+                "error_mm": null,
+                "status": "UNMATCHED",
+                "centroid": {
+                    "x": 657,
+                    "y": 534
+                }
+            }
+        ]
+    }
+]

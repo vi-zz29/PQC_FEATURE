@@ -1,0 +1,2312 @@
+[
+    {
+        "id": 1,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 452,
+            "y": 713
+        },
+        "area": 28.0,
+        "perimeter": 22.49,
+        "bounding_box": {
+            "x": 448,
+            "y": 712,
+            "w": 10,
+            "h": 5
+        },
+        "aspect_ratio": 2.0,
+        "circularity": 0.6959,
+        "solidity": 0.9492,
+        "extent": 0.56,
+        "equivalent_diameter": 5.9708,
+        "enc_radius": 4.6099,
+        "rotation_angle": 0.0,
+        "vertices": 9,
+        "hu_moments": [
+            0.6262370092018038,
+            1.5418462394705614,
+            3.3346268850125864,
+            3.961641320747268,
+            7.654516018910179,
+            4.852487882490214,
+            -7.9747880413996475
+        ]
+    },
+    {
+        "id": 2,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 451,
+            "y": 714
+        },
+        "area": 39.0,
+        "perimeter": 37.66,
+        "bounding_box": {
+            "x": 446,
+            "y": 712,
+            "w": 12,
+            "h": 10
+        },
+        "aspect_ratio": 1.2,
+        "circularity": 0.3456,
+        "solidity": 0.6,
+        "extent": 0.325,
+        "equivalent_diameter": 7.0467,
+        "enc_radius": 7.1064,
+        "rotation_angle": 56.31,
+        "vertices": 10,
+        "hu_moments": [
+            0.40540475360589256,
+            1.074614641142773,
+            1.5560018811061167,
+            2.1276541579788044,
+            4.082454241813032,
+            3.17974744046713,
+            4.165416404173272
+        ]
+    },
+    {
+        "id": 9,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 491,
+            "y": 689
+        },
+        "area": 1802.5,
+        "perimeter": 220.27,
+        "bounding_box": {
+            "x": 462,
+            "y": 664,
+            "w": 54,
+            "h": 60
+        },
+        "aspect_ratio": 0.9,
+        "circularity": 0.4669,
+        "solidity": 0.8901,
+        "extent": 0.5563,
+        "equivalent_diameter": 47.9063,
+        "enc_radius": 32.1872,
+        "rotation_angle": 58.39,
+        "vertices": 5,
+        "hu_moments": [
+            0.7506899259710358,
+            2.7380551628430365,
+            3.006992895238927,
+            4.9547988652744825,
+            8.966060876292985,
+            6.4807070035373355,
+            -9.377883333793264
+        ]
+    },
+    {
+        "id": 11,
+        "shape_type": "circle",
+        "centroid": {
+            "x": 442,
+            "y": 645
+        },
+        "area": 231.0,
+        "perimeter": 57.11,
+        "bounding_box": {
+            "x": 434,
+            "y": 637,
+            "w": 19,
+            "h": 18
+        },
+        "aspect_ratio": 1.0556,
+        "circularity": 0.8899,
+        "solidity": 0.9747,
+        "extent": 0.6754,
+        "equivalent_diameter": 17.1499,
+        "enc_radius": 9.4363,
+        "rotation_angle": 45.0,
+        "vertices": 9,
+        "hu_moments": [
+            0.7950474548294046,
+            3.878240211932166,
+            5.510085121605382,
+            7.640036842437601,
+            14.766204795639727,
+            9.587549259456518,
+            14.232974828490638
+        ]
+    },
+    {
+        "id": 14,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 443,
+            "y": 644
+        },
+        "area": 258.5,
+        "perimeter": 83.84,
+        "bounding_box": {
+            "x": 434,
+            "y": 631,
+            "w": 22,
+            "h": 24
+        },
+        "aspect_ratio": 0.9167,
+        "circularity": 0.4621,
+        "solidity": 0.8091,
+        "extent": 0.4896,
+        "equivalent_diameter": 18.142,
+        "enc_radius": 13.8301,
+        "rotation_angle": 45.0,
+        "vertices": 11,
+        "hu_moments": [
+            0.6812880585902934,
+            2.1487624278994346,
+            2.5021303849479812,
+            2.8915920532691275,
+            5.588460507768394,
+            3.9688665728861383,
+            7.827103053841755
+        ]
+    },
+    {
+        "id": 15,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 560,
+            "y": 630
+        },
+        "area": 28.5,
+        "perimeter": 26.73,
+        "bounding_box": {
+            "x": 557,
+            "y": 626,
+            "w": 6,
+            "h": 11
+        },
+        "aspect_ratio": 0.5455,
+        "circularity": 0.5013,
+        "solidity": 0.8143,
+        "extent": 0.4318,
+        "equivalent_diameter": 6.0239,
+        "enc_radius": 5.2203,
+        "rotation_angle": 71.57,
+        "vertices": 8,
+        "hu_moments": [
+            0.5031611594326072,
+            1.2427158996170333,
+            2.4213787912682734,
+            3.2291966926248112,
+            6.735241829368486,
+            4.909269961660615,
+            -6.064141855375048
+        ]
+    },
+    {
+        "id": 17,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 560,
+            "y": 630
+        },
+        "area": 30.5,
+        "perimeter": 29.07,
+        "bounding_box": {
+            "x": 557,
+            "y": 626,
+            "w": 6,
+            "h": 11
+        },
+        "aspect_ratio": 0.5455,
+        "circularity": 0.4535,
+        "solidity": 0.8026,
+        "extent": 0.4621,
+        "equivalent_diameter": 6.2317,
+        "enc_radius": 5.5903,
+        "rotation_angle": 90.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.48813850411376103,
+            1.2056152780285732,
+            2.274379384762646,
+            3.0801933949512006,
+            6.139203469674033,
+            4.229954574349577,
+            -5.798571144605277
+        ]
+    },
+    {
+        "id": 21,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 426,
+            "y": 630
+        },
+        "area": 83.5,
+        "perimeter": 43.56,
+        "bounding_box": {
+            "x": 423,
+            "y": 623,
+            "w": 10,
+            "h": 17
+        },
+        "aspect_ratio": 0.5882,
+        "circularity": 0.5531,
+        "solidity": 0.8434,
+        "extent": 0.4912,
+        "equivalent_diameter": 10.3109,
+        "enc_radius": 8.0157,
+        "rotation_angle": 90.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.6372992697192854,
+            1.8420387594615744,
+            2.2959695946912673,
+            3.0997723289800034,
+            5.797855296332255,
+            4.06313351469084,
+            7.302952861819752
+        ]
+    },
+    {
+        "id": 23,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 426,
+            "y": 630
+        },
+        "area": 83.5,
+        "perimeter": 43.56,
+        "bounding_box": {
+            "x": 423,
+            "y": 623,
+            "w": 10,
+            "h": 17
+        },
+        "aspect_ratio": 0.5882,
+        "circularity": 0.5531,
+        "solidity": 0.8434,
+        "extent": 0.4912,
+        "equivalent_diameter": 10.3109,
+        "enc_radius": 8.0157,
+        "rotation_angle": 90.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.6372992697192854,
+            1.8420387594615744,
+            2.2959695946912673,
+            3.0997723289800034,
+            5.797855296332255,
+            4.06313351469084,
+            7.302952861819752
+        ]
+    },
+    {
+        "id": 25,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 436,
+            "y": 624
+        },
+        "area": 33.0,
+        "perimeter": 22.49,
+        "bounding_box": {
+            "x": 434,
+            "y": 621,
+            "w": 7,
+            "h": 8
+        },
+        "aspect_ratio": 0.875,
+        "circularity": 0.8202,
+        "solidity": 0.9429,
+        "extent": 0.5893,
+        "equivalent_diameter": 6.482,
+        "enc_radius": 3.808,
+        "rotation_angle": 90.0,
+        "vertices": 10,
+        "hu_moments": [
+            0.7716521297515516,
+            3.1302502759199053,
+            3.53265077689106,
+            5.961630457457361,
+            11.40230112794403,
+            7.615495095500138,
+            -10.717865107178374
+        ]
+    },
+    {
+        "id": 26,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 436,
+            "y": 624
+        },
+        "area": 33.0,
+        "perimeter": 22.49,
+        "bounding_box": {
+            "x": 434,
+            "y": 621,
+            "w": 7,
+            "h": 8
+        },
+        "aspect_ratio": 0.875,
+        "circularity": 0.8202,
+        "solidity": 0.9429,
+        "extent": 0.5893,
+        "equivalent_diameter": 6.482,
+        "enc_radius": 3.808,
+        "rotation_angle": 90.0,
+        "vertices": 10,
+        "hu_moments": [
+            0.7716521297515516,
+            3.1302502759199053,
+            3.53265077689106,
+            5.961630457457361,
+            11.40230112794403,
+            7.615495095500138,
+            -10.717865107178374
+        ]
+    },
+    {
+        "id": 30,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 531,
+            "y": 615
+        },
+        "area": 23.0,
+        "perimeter": 22.49,
+        "bounding_box": {
+            "x": 530,
+            "y": 611,
+            "w": 4,
+            "h": 11
+        },
+        "aspect_ratio": 0.3636,
+        "circularity": 0.5717,
+        "solidity": 0.9583,
+        "extent": 0.5227,
+        "equivalent_diameter": 5.4115,
+        "enc_radius": 5.0001,
+        "rotation_angle": 0.0,
+        "vertices": 6,
+        "hu_moments": [
+            0.5409224868146802,
+            1.2615785770180936,
+            2.815782915201756,
+            3.357617023865463,
+            6.473958413077903,
+            4.1158599486678344,
+            6.891396796789579
+        ]
+    },
+    {
+        "id": 31,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 531,
+            "y": 615
+        },
+        "area": 24.5,
+        "perimeter": 24.24,
+        "bounding_box": {
+            "x": 530,
+            "y": 611,
+            "w": 4,
+            "h": 11
+        },
+        "aspect_ratio": 0.3636,
+        "circularity": 0.5239,
+        "solidity": 0.9245,
+        "extent": 0.5568,
+        "equivalent_diameter": 5.5852,
+        "enc_radius": 5.0501,
+        "rotation_angle": 0.0,
+        "vertices": 7,
+        "hu_moments": [
+            0.5152814679001544,
+            1.1905530329195415,
+            2.7419648429474246,
+            3.12779320649119,
+            6.067180655328006,
+            3.7568945293292937,
+            6.906287318754604
+        ]
+    },
+    {
+        "id": 33,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 438,
+            "y": 692
+        },
+        "area": 3037.0,
+        "perimeter": 405.97,
+        "bounding_box": {
+            "x": 410,
+            "y": 609,
+            "w": 69,
+            "h": 123
+        },
+        "aspect_ratio": 0.561,
+        "circularity": 0.2316,
+        "solidity": 0.647,
+        "extent": 0.3578,
+        "equivalent_diameter": 62.1838,
+        "enc_radius": 67.3239,
+        "rotation_angle": 58.22,
+        "vertices": 8,
+        "hu_moments": [
+            0.45733678644037534,
+            1.1864893411607005,
+            1.455457781103167,
+            1.6290114976647898,
+            3.1735225697971634,
+            2.2782108069365496,
+            -4.162133104545254
+        ]
+    },
+    {
+        "id": 34,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 458,
+            "y": 691
+        },
+        "area": 4908.0,
+        "perimeter": 539.1,
+        "bounding_box": {
+            "x": 410,
+            "y": 609,
+            "w": 106,
+            "h": 123
+        },
+        "aspect_ratio": 0.8618,
+        "circularity": 0.2122,
+        "solidity": 0.5695,
+        "extent": 0.3764,
+        "equivalent_diameter": 79.051,
+        "enc_radius": 68.115,
+        "rotation_angle": 30.96,
+        "vertices": 8,
+        "hu_moments": [
+            0.5384771850952861,
+            1.979758809288379,
+            1.8992952684182163,
+            2.2743077354852894,
+            4.566659373369466,
+            -4.311015775392225,
+            -4.46775508548323
+        ]
+    },
+    {
+        "id": 37,
+        "shape_type": "slot",
+        "centroid": {
+            "x": 492,
+            "y": 598
+        },
+        "area": 42.0,
+        "perimeter": 36.49,
+        "bounding_box": {
+            "x": 484,
+            "y": 597,
+            "w": 18,
+            "h": 4
+        },
+        "aspect_ratio": 4.5,
+        "circularity": 0.3965,
+        "solidity": 0.9545,
+        "extent": 0.5833,
+        "equivalent_diameter": 7.3127,
+        "enc_radius": 8.5148,
+        "rotation_angle": -0.0,
+        "vertices": 6,
+        "hu_moments": [
+            0.3282435120615634,
+            0.7141619700892629,
+            2.512269192855629,
+            2.634001570398259,
+            5.207203337596514,
+            2.993884135877483,
+            6.9645104532213
+        ]
+    },
+    {
+        "id": 39,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 540,
+            "y": 599
+        },
+        "area": 98.0,
+        "perimeter": 73.8,
+        "bounding_box": {
+            "x": 527,
+            "y": 596,
+            "w": 28,
+            "h": 14
+        },
+        "aspect_ratio": 2.0,
+        "circularity": 0.2261,
+        "solidity": 0.5091,
+        "extent": 0.25,
+        "equivalent_diameter": 11.1704,
+        "enc_radius": 13.5094,
+        "rotation_angle": 0.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.316925029640404,
+            0.9887090628010399,
+            1.3589232387835635,
+            2.6285717413883827,
+            4.730384809395059,
+            3.1230930775378347,
+            -4.82564926327642
+        ]
+    },
+    {
+        "id": 40,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 456,
+            "y": 598
+        },
+        "area": 56.5,
+        "perimeter": 32.73,
+        "bounding_box": {
+            "x": 451,
+            "y": 594,
+            "w": 12,
+            "h": 9
+        },
+        "aspect_ratio": 1.3333,
+        "circularity": 0.6629,
+        "solidity": 0.8626,
+        "extent": 0.5231,
+        "equivalent_diameter": 8.4816,
+        "enc_radius": 5.7108,
+        "rotation_angle": 0.0,
+        "vertices": 10,
+        "hu_moments": [
+            0.6955755533771237,
+            2.2232145296716834,
+            2.5301275350801062,
+            3.89888470027563,
+            7.174691366165013,
+            5.1056369844499665,
+            -7.417965502595843
+        ]
+    },
+    {
+        "id": 44,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 568,
+            "y": 592
+        },
+        "area": 66.5,
+        "perimeter": 42.73,
+        "bounding_box": {
+            "x": 560,
+            "y": 589,
+            "w": 16,
+            "h": 9
+        },
+        "aspect_ratio": 1.7778,
+        "circularity": 0.4577,
+        "solidity": 0.7557,
+        "extent": 0.4618,
+        "equivalent_diameter": 9.2017,
+        "enc_radius": 7.9058,
+        "rotation_angle": 84.29,
+        "vertices": 6,
+        "hu_moments": [
+            0.5400973945201277,
+            1.4595141932563707,
+            1.9350247961012688,
+            2.5104489255274123,
+            4.74649664622603,
+            3.273868539755474,
+            5.346081321744678
+        ]
+    },
+    {
+        "id": 47,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 451,
+            "y": 593
+        },
+        "area": 615.0,
+        "perimeter": 186.57,
+        "bounding_box": {
+            "x": 433,
+            "y": 577,
+            "w": 37,
+            "h": 35
+        },
+        "aspect_ratio": 1.0571,
+        "circularity": 0.222,
+        "solidity": 0.7659,
+        "extent": 0.4749,
+        "equivalent_diameter": 27.9829,
+        "enc_radius": 20.0396,
+        "rotation_angle": 20.32,
+        "vertices": 12,
+        "hu_moments": [
+            0.6538019453468193,
+            2.394043243220111,
+            2.5397909227975832,
+            3.716085067512307,
+            7.076255995620258,
+            4.966935329594817,
+            -6.93530305631769
+        ]
+    },
+    {
+        "id": 48,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 412,
+            "y": 591
+        },
+        "area": 192.5,
+        "perimeter": 82.38,
+        "bounding_box": {
+            "x": 407,
+            "y": 575,
+            "w": 11,
+            "h": 34
+        },
+        "aspect_ratio": 0.3235,
+        "circularity": 0.3564,
+        "solidity": 0.7794,
+        "extent": 0.5147,
+        "equivalent_diameter": 15.6556,
+        "enc_radius": 16.5077,
+        "rotation_angle": 83.42,
+        "vertices": 9,
+        "hu_moments": [
+            0.37297233337939373,
+            0.8361586580207455,
+            2.498183545288376,
+            3.2398253509839803,
+            6.665882416388144,
+            -4.700825606495489,
+            6.126204108518554
+        ]
+    },
+    {
+        "id": 49,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 428,
+            "y": 573
+        },
+        "area": 23.0,
+        "perimeter": 21.31,
+        "bounding_box": {
+            "x": 426,
+            "y": 571,
+            "w": 7,
+            "h": 7
+        },
+        "aspect_ratio": 1.0,
+        "circularity": 0.6362,
+        "solidity": 0.8214,
+        "extent": 0.4694,
+        "equivalent_diameter": 5.4115,
+        "enc_radius": 3.6057,
+        "rotation_angle": 75.96,
+        "vertices": 11,
+        "hu_moments": [
+            0.6967023959197571,
+            2.0771070408035532,
+            3.936629014716617,
+            4.630172679036149,
+            -8.956196060292848,
+            -5.6854999919901825,
+            9.288093839455689
+        ]
+    },
+    {
+        "id": 50,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 436,
+            "y": 572
+        },
+        "area": 50.5,
+        "perimeter": 27.9,
+        "bounding_box": {
+            "x": 432,
+            "y": 569,
+            "w": 10,
+            "h": 8
+        },
+        "aspect_ratio": 1.25,
+        "circularity": 0.8153,
+        "solidity": 0.9528,
+        "extent": 0.6312,
+        "equivalent_diameter": 8.0186,
+        "enc_radius": 5.1479,
+        "rotation_angle": 0.0,
+        "vertices": 9,
+        "hu_moments": [
+            0.7486054874705358,
+            2.3130035679038397,
+            3.843906258316646,
+            5.1569237108833255,
+            11.087588013761042,
+            -6.604271660211922,
+            9.657638304758466
+        ]
+    },
+    {
+        "id": 55,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 437,
+            "y": 563
+        },
+        "area": 56.0,
+        "perimeter": 30.14,
+        "bounding_box": {
+            "x": 434,
+            "y": 559,
+            "w": 10,
+            "h": 10
+        },
+        "aspect_ratio": 1.0,
+        "circularity": 0.7746,
+        "solidity": 0.9256,
+        "extent": 0.56,
+        "equivalent_diameter": 8.444,
+        "enc_radius": 5.0154,
+        "rotation_angle": 45.0,
+        "vertices": 9,
+        "hu_moments": [
+            0.7746590581139533,
+            3.2073418551432127,
+            3.4109698882713047,
+            5.504832345214151,
+            9.987139201153486,
+            7.537123108420207,
+            -10.449453225721157
+        ]
+    },
+    {
+        "id": 56,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 448,
+            "y": 560
+        },
+        "area": 29.5,
+        "perimeter": 21.9,
+        "bounding_box": {
+            "x": 445,
+            "y": 558,
+            "w": 8,
+            "h": 7
+        },
+        "aspect_ratio": 1.1429,
+        "circularity": 0.773,
+        "solidity": 0.9219,
+        "extent": 0.5268,
+        "equivalent_diameter": 6.1287,
+        "enc_radius": 4.0312,
+        "rotation_angle": 0.0,
+        "vertices": 12,
+        "hu_moments": [
+            0.7438511859734761,
+            2.314905848119147,
+            3.5578976844456203,
+            4.801894904088588,
+            9.016809382880648,
+            6.185403214153182,
+            9.39529538610265
+        ]
+    },
+    {
+        "id": 57,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 437,
+            "y": 563
+        },
+        "area": 56.5,
+        "perimeter": 29.56,
+        "bounding_box": {
+            "x": 434,
+            "y": 559,
+            "w": 10,
+            "h": 10
+        },
+        "aspect_ratio": 1.0,
+        "circularity": 0.8127,
+        "solidity": 0.9339,
+        "extent": 0.565,
+        "equivalent_diameter": 8.4816,
+        "enc_radius": 5.0154,
+        "rotation_angle": 45.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.7772907764505386,
+            3.2357400134160894,
+            3.427946340599232,
+            5.786850573193394,
+            10.401246292708388,
+            7.702818704974655,
+            -11.143651337429079
+        ]
+    },
+    {
+        "id": 58,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 656,
+            "y": 582
+        },
+        "area": 100.0,
+        "perimeter": 103.66,
+        "bounding_box": {
+            "x": 655,
+            "y": 557,
+            "w": 3,
+            "h": 52
+        },
+        "aspect_ratio": 0.0577,
+        "circularity": 0.117,
+        "solidity": 1.0,
+        "extent": 0.641,
+        "equivalent_diameter": 11.2838,
+        "enc_radius": 25.5001,
+        "rotation_angle": 90.0,
+        "vertices": 2,
+        "hu_moments": [
+            -0.31961954925819297,
+            -0.6364885066162621,
+            20.804017522522006,
+            20.833279479023513,
+            41.651936497196395,
+            20.52266950498577,
+            43.85515587161544
+        ]
+    },
+    {
+        "id": 59,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 446,
+            "y": 550
+        },
+        "area": 60.5,
+        "perimeter": 35.56,
+        "bounding_box": {
+            "x": 443,
+            "y": 545,
+            "w": 9,
+            "h": 13
+        },
+        "aspect_ratio": 0.6923,
+        "circularity": 0.6014,
+        "solidity": 0.8521,
+        "extent": 0.5171,
+        "equivalent_diameter": 8.7767,
+        "enc_radius": 6.7083,
+        "rotation_angle": 7.13,
+        "vertices": 10,
+        "hu_moments": [
+            0.6217846832710345,
+            1.596450062839978,
+            2.9339699408443156,
+            3.713744601533388,
+            7.230651223903784,
+            4.676997961724967,
+            -7.1525649786222445
+        ]
+    },
+    {
+        "id": 60,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 446,
+            "y": 550
+        },
+        "area": 60.5,
+        "perimeter": 35.56,
+        "bounding_box": {
+            "x": 443,
+            "y": 545,
+            "w": 9,
+            "h": 13
+        },
+        "aspect_ratio": 0.6923,
+        "circularity": 0.6014,
+        "solidity": 0.8521,
+        "extent": 0.5171,
+        "equivalent_diameter": 8.7767,
+        "enc_radius": 6.7083,
+        "rotation_angle": 7.13,
+        "vertices": 9,
+        "hu_moments": [
+            0.6217846832710345,
+            1.596450062839978,
+            2.9339699408443156,
+            3.713744601533388,
+            7.230651223903784,
+            4.676997961724967,
+            -7.1525649786222445
+        ]
+    },
+    {
+        "id": 64,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 465,
+            "y": 563
+        },
+        "area": 708.5,
+        "perimeter": 191.15,
+        "bounding_box": {
+            "x": 452,
+            "y": 531,
+            "w": 21,
+            "h": 64
+        },
+        "aspect_ratio": 0.3281,
+        "circularity": 0.2437,
+        "solidity": 0.7718,
+        "extent": 0.5272,
+        "equivalent_diameter": 30.0348,
+        "enc_radius": 31.7531,
+        "rotation_angle": 0.0,
+        "vertices": 11,
+        "hu_moments": [
+            0.4422336217453186,
+            1.0206251406303621,
+            2.775562323200183,
+            3.6615632093891577,
+            7.222823997830034,
+            5.57773886688738,
+            -6.930311398113924
+        ]
+    },
+    {
+        "id": 65,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 446,
+            "y": 534
+        },
+        "area": 28.5,
+        "perimeter": 23.07,
+        "bounding_box": {
+            "x": 444,
+            "y": 530,
+            "w": 5,
+            "h": 10
+        },
+        "aspect_ratio": 0.5,
+        "circularity": 0.6729,
+        "solidity": 0.9344,
+        "extent": 0.57,
+        "equivalent_diameter": 6.0239,
+        "enc_radius": 4.6099,
+        "rotation_angle": 90.0,
+        "vertices": 9,
+        "hu_moments": [
+            0.6034444968463476,
+            1.4737166187763049,
+            3.1140392481452106,
+            3.7217283443110722,
+            7.162315938006429,
+            4.4956006438924545,
+            -7.641193046123564
+        ]
+    },
+    {
+        "id": 66,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 452,
+            "y": 530
+        },
+        "area": 65.5,
+        "perimeter": 33.9,
+        "bounding_box": {
+            "x": 448,
+            "y": 526,
+            "w": 10,
+            "h": 11
+        },
+        "aspect_ratio": 0.9091,
+        "circularity": 0.7163,
+        "solidity": 0.9034,
+        "extent": 0.5955,
+        "equivalent_diameter": 9.1322,
+        "enc_radius": 5.8311,
+        "rotation_angle": 90.0,
+        "vertices": 10,
+        "hu_moments": [
+            0.7331631961408531,
+            2.3594178335041085,
+            3.059436028595412,
+            4.415294637877846,
+            -8.223839811514784,
+            -5.6943535052850125,
+            -8.429477229228025
+        ]
+    },
+    {
+        "id": 67,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 450,
+            "y": 533
+        },
+        "area": 127.5,
+        "perimeter": 78.53,
+        "bounding_box": {
+            "x": 444,
+            "y": 526,
+            "w": 14,
+            "h": 19
+        },
+        "aspect_ratio": 0.7368,
+        "circularity": 0.2598,
+        "solidity": 0.7044,
+        "extent": 0.4793,
+        "equivalent_diameter": 12.7412,
+        "enc_radius": 9.3552,
+        "rotation_angle": 90.0,
+        "vertices": 13,
+        "hu_moments": [
+            0.5675318903943963,
+            1.964388020273049,
+            2.552798383489809,
+            3.1362945226637393,
+            6.020586908793707,
+            4.1568989887923955,
+            -6.369141712662363
+        ]
+    },
+    {
+        "id": 68,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 437,
+            "y": 537
+        },
+        "area": 182.0,
+        "perimeter": 93.8,
+        "bounding_box": {
+            "x": 433,
+            "y": 521,
+            "w": 11,
+            "h": 34
+        },
+        "aspect_ratio": 0.3235,
+        "circularity": 0.2599,
+        "solidity": 0.6766,
+        "extent": 0.4866,
+        "equivalent_diameter": 15.2227,
+        "enc_radius": 16.5681,
+        "rotation_angle": 87.14,
+        "vertices": 9,
+        "hu_moments": [
+            0.3322631364770122,
+            0.7741000748950577,
+            2.9513558322672444,
+            3.4701042617112154,
+            6.696647182840385,
+            4.07086955771911,
+            7.257564519044523
+        ]
+    },
+    {
+        "id": 69,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 437,
+            "y": 537
+        },
+        "area": 185.0,
+        "perimeter": 90.28,
+        "bounding_box": {
+            "x": 433,
+            "y": 521,
+            "w": 11,
+            "h": 34
+        },
+        "aspect_ratio": 0.3235,
+        "circularity": 0.2852,
+        "solidity": 0.6877,
+        "extent": 0.4947,
+        "equivalent_diameter": 15.3476,
+        "enc_radius": 16.5681,
+        "rotation_angle": 87.14,
+        "vertices": 9,
+        "hu_moments": [
+            0.3404042005873266,
+            0.7899194671156948,
+            2.9806957012432203,
+            3.6614035163686025,
+            6.98331397142461,
+            4.408056009304348,
+            8.183797767927093
+        ]
+    },
+    {
+        "id": 70,
+        "shape_type": "circle",
+        "centroid": {
+            "x": 457,
+            "y": 521
+        },
+        "area": 22.0,
+        "perimeter": 17.66,
+        "bounding_box": {
+            "x": 454,
+            "y": 519,
+            "w": 7,
+            "h": 5
+        },
+        "aspect_ratio": 1.4,
+        "circularity": 0.8868,
+        "solidity": 1.0,
+        "extent": 0.6286,
+        "equivalent_diameter": 5.2926,
+        "enc_radius": 3.1624,
+        "rotation_angle": 90.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.7605660755873459,
+            2.3776775255373583,
+            18.736969419395543,
+            18.315228620216846,
+            36.88487906607579,
+            20.08566346277265,
+            -37.211615494818986
+        ]
+    },
+    {
+        "id": 72,
+        "shape_type": "circle",
+        "centroid": {
+            "x": 452,
+            "y": 516
+        },
+        "area": 25.0,
+        "perimeter": 18.49,
+        "bounding_box": {
+            "x": 449,
+            "y": 514,
+            "w": 7,
+            "h": 6
+        },
+        "aspect_ratio": 1.1667,
+        "circularity": 0.9194,
+        "solidity": 1.0,
+        "extent": 0.5952,
+        "equivalent_diameter": 5.6419,
+        "enc_radius": 3.206,
+        "rotation_angle": 0.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.7881085391364229,
+            3.2411875058072246,
+            3.947375412533938,
+            6.396532432321314,
+            11.568486354749412,
+            8.017126185225129,
+            17.40019757926714
+        ]
+    },
+    {
+        "id": 73,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 454,
+            "y": 518
+        },
+        "area": 49.0,
+        "perimeter": 34.14,
+        "bounding_box": {
+            "x": 449,
+            "y": 514,
+            "w": 12,
+            "h": 10
+        },
+        "aspect_ratio": 1.2,
+        "circularity": 0.5282,
+        "solidity": 0.8099,
+        "extent": 0.4083,
+        "equivalent_diameter": 7.8987,
+        "enc_radius": 6.2651,
+        "rotation_angle": 45.0,
+        "vertices": 12,
+        "hu_moments": [
+            0.5438036227762657,
+            1.357630987380355,
+            3.543653118427784,
+            4.012033281492177,
+            7.880660094102348,
+            4.839181293901741,
+            8.023062584318087
+        ]
+    },
+    {
+        "id": 75,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 469,
+            "y": 520
+        },
+        "area": 64.5,
+        "perimeter": 39.9,
+        "bounding_box": {
+            "x": 467,
+            "y": 512,
+            "w": 6,
+            "h": 18
+        },
+        "aspect_ratio": 0.3333,
+        "circularity": 0.5091,
+        "solidity": 0.9149,
+        "extent": 0.5972,
+        "equivalent_diameter": 9.0622,
+        "enc_radius": 8.5587,
+        "rotation_angle": 90.0,
+        "vertices": 7,
+        "hu_moments": [
+            0.46256649552492746,
+            1.0405224658189103,
+            3.4373712277383617,
+            4.383814526327158,
+            -9.07738466729931,
+            -5.219282849514776,
+            -8.300388309210904
+        ]
+    },
+    {
+        "id": 76,
+        "shape_type": "rectangle",
+        "centroid": {
+            "x": 412,
+            "y": 543
+        },
+        "area": 455.5,
+        "perimeter": 154.38,
+        "bounding_box": {
+            "x": 409,
+            "y": 512,
+            "w": 9,
+            "h": 65
+        },
+        "aspect_ratio": 0.1385,
+        "circularity": 0.2402,
+        "solidity": 0.9268,
+        "extent": 0.7786,
+        "equivalent_diameter": 24.0824,
+        "enc_radius": 32.0157,
+        "rotation_angle": 0.0,
+        "vertices": 4,
+        "hu_moments": [
+            0.14987548045606477,
+            0.32834491883078815,
+            3.006642958776784,
+            3.226910186663457,
+            6.348256559719368,
+            3.4794043073849963,
+            -7.184396197674933
+        ]
+    },
+    {
+        "id": 77,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 469,
+            "y": 520
+        },
+        "area": 64.5,
+        "perimeter": 39.9,
+        "bounding_box": {
+            "x": 467,
+            "y": 512,
+            "w": 6,
+            "h": 18
+        },
+        "aspect_ratio": 0.3333,
+        "circularity": 0.5091,
+        "solidity": 0.9149,
+        "extent": 0.5972,
+        "equivalent_diameter": 9.0622,
+        "enc_radius": 8.5587,
+        "rotation_angle": 90.0,
+        "vertices": 7,
+        "hu_moments": [
+            0.46256649552492746,
+            1.0405224658189103,
+            3.4373712277383617,
+            4.383814526327158,
+            -9.07738466729931,
+            -5.219282849514776,
+            -8.300388309210904
+        ]
+    },
+    {
+        "id": 79,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 442,
+            "y": 514
+        },
+        "area": 29.5,
+        "perimeter": 29.56,
+        "bounding_box": {
+            "x": 439,
+            "y": 510,
+            "w": 9,
+            "h": 9
+        },
+        "aspect_ratio": 1.0,
+        "circularity": 0.4244,
+        "solidity": 0.7662,
+        "extent": 0.3642,
+        "equivalent_diameter": 6.1287,
+        "enc_radius": 5.0001,
+        "rotation_angle": 45.0,
+        "vertices": 12,
+        "hu_moments": [
+            0.4939328431739363,
+            1.2776086433506673,
+            2.379445600938887,
+            3.350287161596614,
+            7.332031394646352,
+            -5.334488948523461,
+            -6.216424905237823
+        ]
+    },
+    {
+        "id": 84,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 431,
+            "y": 498
+        },
+        "area": 39.5,
+        "perimeter": 26.73,
+        "bounding_box": {
+            "x": 427,
+            "y": 495,
+            "w": 10,
+            "h": 8
+        },
+        "aspect_ratio": 1.25,
+        "circularity": 0.6948,
+        "solidity": 0.8977,
+        "extent": 0.4938,
+        "equivalent_diameter": 7.0918,
+        "enc_radius": 4.6099,
+        "rotation_angle": 45.0,
+        "vertices": 12,
+        "hu_moments": [
+            0.7510640766049943,
+            2.573714485160839,
+            3.8006613766255435,
+            5.178474176455002,
+            9.676673822924498,
+            6.67504268596475,
+            -10.372668305246915
+        ]
+    },
+    {
+        "id": 85,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 654,
+            "y": 524
+        },
+        "area": 129.0,
+        "perimeter": 130.49,
+        "bounding_box": {
+            "x": 653,
+            "y": 493,
+            "w": 4,
+            "h": 65
+        },
+        "aspect_ratio": 0.0615,
+        "circularity": 0.0952,
+        "solidity": 0.8165,
+        "extent": 0.4962,
+        "equivalent_diameter": 12.8159,
+        "enc_radius": 32.0001,
+        "rotation_angle": 0.0,
+        "vertices": 2,
+        "hu_moments": [
+            -0.41256925297069724,
+            -0.8232050085021716,
+            1.4553270090243342,
+            1.466303221190754,
+            2.9271185567363744,
+            1.0548515176968338,
+            -5.9238522983439355
+        ]
+    },
+    {
+        "id": 86,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 457,
+            "y": 499
+        },
+        "area": 354.0,
+        "perimeter": 139.6,
+        "bounding_box": {
+            "x": 442,
+            "y": 484,
+            "w": 30,
+            "h": 29
+        },
+        "aspect_ratio": 1.0345,
+        "circularity": 0.2283,
+        "solidity": 0.6448,
+        "extent": 0.4069,
+        "equivalent_diameter": 21.2303,
+        "enc_radius": 16.7835,
+        "rotation_angle": 56.98,
+        "vertices": 15,
+        "hu_moments": [
+            0.5896874022128221,
+            1.7414249528371697,
+            2.435751059685011,
+            3.6914703298683924,
+            -6.962546710622381,
+            -4.808431904341904,
+            -6.86052082583782
+        ]
+    },
+    {
+        "id": 87,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 441,
+            "y": 480
+        },
+        "area": 237.0,
+        "perimeter": 60.28,
+        "bounding_box": {
+            "x": 433,
+            "y": 471,
+            "w": 19,
+            "h": 19
+        },
+        "aspect_ratio": 1.0,
+        "circularity": 0.8195,
+        "solidity": 0.948,
+        "extent": 0.6565,
+        "equivalent_diameter": 17.3712,
+        "enc_radius": 9.4869,
+        "rotation_angle": 39.81,
+        "vertices": 9,
+        "hu_moments": [
+            0.7919434080399882,
+            3.749929307559607,
+            4.806316821198437,
+            6.943088182023105,
+            -12.82455190007091,
+            -9.772646500718345,
+            -13.57452725873491
+        ]
+    },
+    {
+        "id": 88,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 541,
+            "y": 529
+        },
+        "area": 17480.5,
+        "perimeter": 734.41,
+        "bounding_box": {
+            "x": 474,
+            "y": 462,
+            "w": 135,
+            "h": 137
+        },
+        "aspect_ratio": 0.9854,
+        "circularity": 0.4073,
+        "solidity": 0.9747,
+        "extent": 0.9451,
+        "equivalent_diameter": 149.1873,
+        "enc_radius": 92.3324,
+        "rotation_angle": 89.47,
+        "vertices": 6,
+        "hu_moments": [
+            0.7780388452679949,
+            4.574798496942354,
+            5.392496867094064,
+            7.27033107303133,
+            13.91191555794978,
+            9.684759792447387,
+            -13.661251119105485
+        ]
+    },
+    {
+        "id": 91,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 414,
+            "y": 462
+        },
+        "area": 383.5,
+        "perimeter": 149.36,
+        "bounding_box": {
+            "x": 409,
+            "y": 442,
+            "w": 17,
+            "h": 49
+        },
+        "aspect_ratio": 0.3469,
+        "circularity": 0.216,
+        "solidity": 0.7202,
+        "extent": 0.4604,
+        "equivalent_diameter": 22.0972,
+        "enc_radius": 24.2607,
+        "rotation_angle": 11.56,
+        "vertices": 9,
+        "hu_moments": [
+            0.2845329743725663,
+            0.6510358049613703,
+            1.6119752692073348,
+            1.8885677210146954,
+            3.643741966670623,
+            2.235932015308729,
+            4.464443238659854
+        ]
+    },
+    {
+        "id": 96,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 468,
+            "y": 408
+        },
+        "area": 74.5,
+        "perimeter": 47.21,
+        "bounding_box": {
+            "x": 458,
+            "y": 404,
+            "w": 20,
+            "h": 9
+        },
+        "aspect_ratio": 2.2222,
+        "circularity": 0.42,
+        "solidity": 0.7926,
+        "extent": 0.4139,
+        "equivalent_diameter": 9.7394,
+        "enc_radius": 9.8235,
+        "rotation_angle": 74.74,
+        "vertices": 9,
+        "hu_moments": [
+            0.3989172492624754,
+            0.8996336518868854,
+            2.4867132914506187,
+            3.2404199394425652,
+            6.582315899346266,
+            -4.795821993340638,
+            -6.129412276383803
+        ]
+    },
+    {
+        "id": 99,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 456,
+            "y": 402
+        },
+        "area": 50.5,
+        "perimeter": 36.73,
+        "bounding_box": {
+            "x": 450,
+            "y": 398,
+            "w": 15,
+            "h": 8
+        },
+        "aspect_ratio": 1.875,
+        "circularity": 0.4704,
+        "solidity": 0.7537,
+        "extent": 0.4208,
+        "equivalent_diameter": 8.0186,
+        "enc_radius": 7.2802,
+        "rotation_angle": 15.26,
+        "vertices": 9,
+        "hu_moments": [
+            0.43178971013291517,
+            1.0092799479499748,
+            2.389582100598184,
+            3.0649363194727317,
+            6.020090333359171,
+            3.9728367952052235,
+            5.885777185299149
+        ]
+    },
+    {
+        "id": 100,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 456,
+            "y": 402
+        },
+        "area": 51.0,
+        "perimeter": 36.14,
+        "bounding_box": {
+            "x": 450,
+            "y": 398,
+            "w": 15,
+            "h": 8
+        },
+        "aspect_ratio": 1.875,
+        "circularity": 0.4906,
+        "solidity": 0.7612,
+        "extent": 0.425,
+        "equivalent_diameter": 8.0582,
+        "enc_radius": 7.2802,
+        "rotation_angle": 15.26,
+        "vertices": 9,
+        "hu_moments": [
+            0.4370123208160322,
+            1.0218645397576802,
+            2.378662817154332,
+            3.0050881101714277,
+            5.846201903326057,
+            3.8061995366235126,
+            5.848762790302912
+        ]
+    },
+    {
+        "id": 104,
+        "shape_type": "rectangle",
+        "centroid": {
+            "x": 645,
+            "y": 422
+        },
+        "area": 359.5,
+        "perimeter": 282.61,
+        "bounding_box": {
+            "x": 614,
+            "y": 382,
+            "w": 42,
+            "h": 112
+        },
+        "aspect_ratio": 0.375,
+        "circularity": 0.0566,
+        "solidity": 0.1845,
+        "extent": 0.0764,
+        "equivalent_diameter": 21.3946,
+        "enc_radius": 58.8261,
+        "rotation_angle": 70.31,
+        "vertices": 4,
+        "hu_moments": [
+            -0.5031706202168557,
+            -0.9184042558440686,
+            -1.2253444364605401,
+            -0.8745945780800584,
+            -1.8983024257305645,
+            -1.2045456495056306,
+            1.4528495018800076
+        ]
+    },
+    {
+        "id": 106,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 590,
+            "y": 372
+        },
+        "area": 233.5,
+        "perimeter": 125.3,
+        "bounding_box": {
+            "x": 565,
+            "y": 359,
+            "w": 51,
+            "h": 26
+        },
+        "aspect_ratio": 1.9615,
+        "circularity": 0.1869,
+        "solidity": 0.6919,
+        "extent": 0.1761,
+        "equivalent_diameter": 17.2424,
+        "enc_radius": 27.3131,
+        "rotation_angle": 26.57,
+        "vertices": 5,
+        "hu_moments": [
+            0.034716936842417924,
+            0.08884521681636358,
+            1.9093104377114856,
+            2.0564094550495855,
+            4.039390260316534,
+            2.111462070618696,
+            -5.666567691707004
+        ]
+    },
+    {
+        "id": 107,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 557,
+            "y": 356
+        },
+        "area": 49.5,
+        "perimeter": 39.21,
+        "bounding_box": {
+            "x": 550,
+            "y": 352,
+            "w": 17,
+            "h": 9
+        },
+        "aspect_ratio": 1.8889,
+        "circularity": 0.4045,
+        "solidity": 0.8462,
+        "extent": 0.3235,
+        "equivalent_diameter": 7.9389,
+        "enc_radius": 8.5441,
+        "rotation_angle": 23.96,
+        "vertices": 7,
+        "hu_moments": [
+            0.3977737365842255,
+            0.888764888841529,
+            2.481613871909278,
+            3.151109106126312,
+            6.12654303662448,
+            4.029095733019883,
+            6.109752638004524
+        ]
+    },
+    {
+        "id": 108,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 457,
+            "y": 371
+        },
+        "area": 1102.0,
+        "perimeter": 132.91,
+        "bounding_box": {
+            "x": 439,
+            "y": 352,
+            "w": 39,
+            "h": 38
+        },
+        "aspect_ratio": 1.0263,
+        "circularity": 0.7839,
+        "solidity": 0.9624,
+        "extent": 0.7436,
+        "equivalent_diameter": 37.4581,
+        "enc_radius": 20.66,
+        "rotation_angle": 0.0,
+        "vertices": 8,
+        "hu_moments": [
+            0.7948209745320101,
+            4.391581342630099,
+            4.222931272310636,
+            7.123936647564808,
+            13.07939206593276,
+            9.500531221062968,
+            -12.86656481838568
+        ]
+    },
+    {
+        "id": 109,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 457,
+            "y": 381
+        },
+        "area": 1428.5,
+        "perimeter": 396.78,
+        "bounding_box": {
+            "x": 431,
+            "y": 347,
+            "w": 54,
+            "h": 66
+        },
+        "aspect_ratio": 0.8182,
+        "circularity": 0.114,
+        "solidity": 0.5062,
+        "extent": 0.4008,
+        "equivalent_diameter": 42.6477,
+        "enc_radius": 35.6091,
+        "rotation_angle": 0.0,
+        "vertices": 10,
+        "hu_moments": [
+            0.39519206521651634,
+            2.0452091611591707,
+            2.9795148407589025,
+            2.372025530881901,
+            -5.287007937696077,
+            3.428192900339487,
+            -5.135516281163199
+        ]
+    },
+    {
+        "id": 110,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 458,
+            "y": 378
+        },
+        "area": 2653.5,
+        "perimeter": 257.58,
+        "bounding_box": {
+            "x": 431,
+            "y": 347,
+            "w": 55,
+            "h": 67
+        },
+        "aspect_ratio": 0.8209,
+        "circularity": 0.5026,
+        "solidity": 0.9185,
+        "extent": 0.7201,
+        "equivalent_diameter": 58.1252,
+        "enc_radius": 35.9202,
+        "rotation_angle": 0.0,
+        "vertices": 11,
+        "hu_moments": [
+            0.7628003892562552,
+            2.591365580081558,
+            3.6110549228815962,
+            4.878671228109156,
+            9.140584888470345,
+            6.214976755084602,
+            -9.684511331957076
+        ]
+    },
+    {
+        "id": 112,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 541,
+            "y": 490
+        },
+        "area": 42150.0,
+        "perimeter": 2543.79,
+        "bounding_box": {
+            "x": 408,
+            "y": 332,
+            "w": 249,
+            "h": 346
+        },
+        "aspect_ratio": 0.7197,
+        "circularity": 0.0819,
+        "solidity": 0.5729,
+        "extent": 0.4892,
+        "equivalent_diameter": 231.6615,
+        "enc_radius": 188.7314,
+        "rotation_angle": 85.18,
+        "vertices": 12,
+        "hu_moments": [
+            0.42953304744285936,
+            1.5999107261484824,
+            2.426985164752412,
+            2.710955145176911,
+            5.355198443971222,
+            4.228488776687978,
+            -5.54653287620858
+        ]
+    },
+    {
+        "id": 113,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 462,
+            "y": 590
+        },
+        "area": 18042.0,
+        "perimeter": 4142.47,
+        "bounding_box": {
+            "x": 406,
+            "y": 329,
+            "w": 253,
+            "h": 405
+        },
+        "aspect_ratio": 0.6247,
+        "circularity": 0.0132,
+        "solidity": 0.2339,
+        "extent": 0.1761,
+        "equivalent_diameter": 151.5645,
+        "enc_radius": 204.1905,
+        "rotation_angle": 89.53,
+        "vertices": 12,
+        "hu_moments": [
+            0.145385501226727,
+            0.6987377742978419,
+            1.4743083096394771,
+            1.0487289456136022,
+            2.7090393908943837,
+            1.5046567197983984,
+            -2.347946059041296
+        ]
+    },
+    {
+        "id": 114,
+        "shape_type": "ellipse",
+        "centroid": {
+            "x": 521,
+            "y": 522
+        },
+        "area": 82311.5,
+        "perimeter": 1196.74,
+        "bounding_box": {
+            "x": 406,
+            "y": 329,
+            "w": 253,
+            "h": 405
+        },
+        "aspect_ratio": 0.6247,
+        "circularity": 0.7222,
+        "solidity": 0.9553,
+        "extent": 0.8033,
+        "equivalent_diameter": 323.7318,
+        "enc_radius": 205.2014,
+        "rotation_angle": 89.53,
+        "vertices": 7,
+        "hu_moments": [
+            0.7455673142708007,
+            2.451544565438915,
+            3.193855082226858,
+            4.52732601804642,
+            9.011021190444602,
+            -6.409056372791473,
+            -8.400597894673055
+        ]
+    },
+    {
+        "id": 115,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 6,
+            "y": 259
+        },
+        "area": 83.0,
+        "perimeter": 82.97,
+        "bounding_box": {
+            "x": 0,
+            "y": 240,
+            "w": 9,
+            "h": 36
+        },
+        "aspect_ratio": 0.25,
+        "circularity": 0.1515,
+        "solidity": 0.4926,
+        "extent": 0.2562,
+        "equivalent_diameter": 10.28,
+        "enc_radius": 17.7554,
+        "rotation_angle": 9.78,
+        "vertices": 5,
+        "hu_moments": [
+            -0.15012018029443475,
+            -0.28096178038217146,
+            1.27733576238331,
+            1.8698303368660176,
+            3.602193757748428,
+            2.0827895339407,
+            3.5859661175032858
+        ]
+    },
+    {
+        "id": 118,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 5,
+            "y": 254
+        },
+        "area": 104.0,
+        "perimeter": 106.97,
+        "bounding_box": {
+            "x": 0,
+            "y": 234,
+            "w": 9,
+            "h": 42
+        },
+        "aspect_ratio": 0.2143,
+        "circularity": 0.1142,
+        "solidity": 0.3323,
+        "extent": 0.2751,
+        "equivalent_diameter": 11.5073,
+        "enc_radius": 20.7184,
+        "rotation_angle": 0.0,
+        "vertices": 6,
+        "hu_moments": [
+            -0.23940802563576097,
+            -0.4471359538877347,
+            0.6091749054610404,
+            1.4823573472064941,
+            -2.652063371721103,
+            -1.3155168563403,
+            2.7089254539579217
+        ]
+    },
+    {
+        "id": 119,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 7,
+            "y": 127
+        },
+        "area": 76.5,
+        "perimeter": 78.73,
+        "bounding_box": {
+            "x": 0,
+            "y": 110,
+            "w": 11,
+            "h": 32
+        },
+        "aspect_ratio": 0.3438,
+        "circularity": 0.1551,
+        "solidity": 0.4005,
+        "extent": 0.2173,
+        "equivalent_diameter": 9.8693,
+        "enc_radius": 16.0079,
+        "rotation_angle": 13.57,
+        "vertices": 6,
+        "hu_moments": [
+            -0.11744459270340543,
+            -0.1906322869471463,
+            0.6987693931450897,
+            1.1871703716725166,
+            2.2020749330018368,
+            1.2537942974494967,
+            2.405023590376909
+        ]
+    },
+    {
+        "id": 121,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 6,
+            "y": 125
+        },
+        "area": 93.5,
+        "perimeter": 97.07,
+        "bounding_box": {
+            "x": 0,
+            "y": 109,
+            "w": 11,
+            "h": 33
+        },
+        "aspect_ratio": 0.3333,
+        "circularity": 0.1247,
+        "solidity": 0.3011,
+        "extent": 0.2576,
+        "equivalent_diameter": 10.9109,
+        "enc_radius": 16.6209,
+        "rotation_angle": 90.0,
+        "vertices": 6,
+        "hu_moments": [
+            -0.1531164489365763,
+            -0.21351060378453993,
+            0.6371437801409487,
+            1.4352239939403026,
+            -2.4920883847980138,
+            -1.3329503552911637,
+            2.992262674753307
+        ]
+    },
+    {
+        "id": 122,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 7,
+            "y": 92
+        },
+        "area": 54.5,
+        "perimeter": 56.73,
+        "bounding_box": {
+            "x": 0,
+            "y": 81,
+            "w": 11,
+            "h": 20
+        },
+        "aspect_ratio": 0.55,
+        "circularity": 0.2128,
+        "solidity": 0.4486,
+        "extent": 0.2477,
+        "equivalent_diameter": 8.3302,
+        "enc_radius": 10.3079,
+        "rotation_angle": -0.0,
+        "vertices": 6,
+        "hu_moments": [
+            0.10769361063455168,
+            0.3971467408218323,
+            0.7254978531530658,
+            1.3607650484615863,
+            2.6241103217825117,
+            1.8734277441484102,
+            2.501731597256813
+        ]
+    },
+    {
+        "id": 124,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 6,
+            "y": 90
+        },
+        "area": 73.5,
+        "perimeter": 91.9,
+        "bounding_box": {
+            "x": 0,
+            "y": 80,
+            "w": 11,
+            "h": 21
+        },
+        "aspect_ratio": 0.5238,
+        "circularity": 0.1094,
+        "solidity": 0.3703,
+        "extent": 0.3182,
+        "equivalent_diameter": 9.6738,
+        "enc_radius": 11.1804,
+        "rotation_angle": 90.0,
+        "vertices": 10,
+        "hu_moments": [
+            0.08545088546258063,
+            0.45760956881081044,
+            1.183759485708991,
+            1.730628857296826,
+            -3.521292553703994,
+            -2.146037559234502,
+            3.240473523793493
+        ]
+    },
+    {
+        "id": 125,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 7,
+            "y": 53
+        },
+        "area": 63.5,
+        "perimeter": 63.21,
+        "bounding_box": {
+            "x": 0,
+            "y": 39,
+            "w": 12,
+            "h": 25
+        },
+        "aspect_ratio": 0.48,
+        "circularity": 0.1997,
+        "solidity": 0.4601,
+        "extent": 0.2117,
+        "equivalent_diameter": 8.9917,
+        "enc_radius": 12.8161,
+        "rotation_angle": 22.25,
+        "vertices": 9,
+        "hu_moments": [
+            0.0457683873859894,
+            0.1755582221878349,
+            0.7513342831467827,
+            1.3135857752695332,
+            2.5037306961700185,
+            1.7913447047375493,
+            2.489620100725809
+        ]
+    },
+    {
+        "id": 127,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 9,
+            "y": 20
+        },
+        "area": 62.0,
+        "perimeter": 64.14,
+        "bounding_box": {
+            "x": 7,
+            "y": 7,
+            "w": 7,
+            "h": 29
+        },
+        "aspect_ratio": 0.2414,
+        "circularity": 0.1894,
+        "solidity": 0.5636,
+        "extent": 0.3054,
+        "equivalent_diameter": 8.8849,
+        "enc_radius": 14.1422,
+        "rotation_angle": 13.24,
+        "vertices": 7,
+        "hu_moments": [
+            -0.00027016654732348955,
+            0.03752945179051842,
+            1.4285403025336894,
+            1.8314273235959009,
+            3.4916696086483143,
+            2.0360273630499592,
+            3.904318379946114
+        ]
+    },
+    {
+        "id": 128,
+        "shape_type": "slot",
+        "centroid": {
+            "x": 5,
+            "y": 7
+        },
+        "area": 20.0,
+        "perimeter": 23.66,
+        "bounding_box": {
+            "x": 0,
+            "y": 6,
+            "w": 12,
+            "h": 3
+        },
+        "aspect_ratio": 4.0,
+        "circularity": 0.4491,
+        "solidity": 1.0,
+        "extent": 0.5556,
+        "equivalent_diameter": 5.0463,
+        "enc_radius": 5.5001,
+        "rotation_angle": -0.0,
+        "vertices": 6,
+        "hu_moments": [
+            0.3598499590638985,
+            0.7850899535706627,
+            30.29681959241423,
+            29.78627458220762,
+            -60.38066363817633,
+            -30.40066830860931,
+            59.84555043647898
+        ]
+    },
+    {
+        "id": 129,
+        "shape_type": "polygon",
+        "centroid": {
+            "x": 8,
+            "y": 33
+        },
+        "area": 158.5,
+        "perimeter": 162.87,
+        "bounding_box": {
+            "x": 0,
+            "y": 6,
+            "w": 14,
+            "h": 58
+        },
+        "aspect_ratio": 0.2414,
+        "circularity": 0.0751,
+        "solidity": 0.236,
+        "extent": 0.1952,
+        "equivalent_diameter": 14.2059,
+        "enc_radius": 28.9354,
+        "rotation_angle": 90.0,
+        "vertices": 10,
+        "hu_moments": [
+            -0.388703854364403,
+            -0.7426519989450524,
+            0.4321009197254508,
+            1.0068308207498269,
+            1.9296792742588977,
+            1.1224886855118366,
+            -1.8343283868703406
+        ]
+    }
+]

@@ -1,0 +1,192 @@
+{
+    "part_number": "BEV820-BM-01",
+    "revision": "B",
+    "material": "AISI 304",
+    "surface_finish": "ELECTROPOLISH",
+    "ra_values": [
+        250.0
+    ],
+    "units": "inch",
+    "surface_area": null,
+    "metric_threads": [],
+    "unc_threads": [
+        {
+            "thread": "10-24 UNC"
+        },
+        {
+            "thread": "3/8-16 UNC"
+        }
+    ],
+    "pcd_features": [],
+    "slot_features": [],
+    "hole_patterns": [
+        {
+            "count": 2,
+            "diameter": 0.15,
+            "through": false,
+            "depth": null
+        }
+    ],
+    "holes": [
+        {
+            "diameter": 0.24,
+            "through": false,
+            "depth": null
+        },
+        {
+            "diameter": 0.3735,
+            "through": false,
+            "depth": null
+        },
+        {
+            "diameter": 0.313,
+            "through": true,
+            "depth": null
+        },
+        {
+            "diameter": 0.43,
+            "through": false,
+            "depth": null
+        }
+    ],
+    "angles": [],
+    "radii": [
+        {
+            "radius": 0.44
+        },
+        {
+            "radius": 0.25
+        },
+        {
+            "radius": 0.13
+        },
+        {
+            "radius": 0.281
+        },
+        {
+            "radius": 0.469
+        }
+    ],
+    "chamfers": [
+        {
+            "size": 0.03,
+            "angle": 45
+        },
+        {
+            "size": 0.24,
+            "angle": 90
+        },
+        {
+            "size": 0.43,
+            "angle": 90
+        }
+    ],
+    "fit_tolerances": [],
+    "tolerance_groups": [
+        {
+            "nominal": 0.374,
+            "lower_limit": 0.3735,
+            "upper_limit": 0.3745
+        }
+    ],
+    "dimensions": [
+        0.0,
+        0.005,
+        0.01,
+        0.03,
+        0.15,
+        0.313,
+        0.373,
+        0.3735,
+        0.3745,
+        0.375,
+        0.38,
+        0.381,
+        0.43,
+        0.5,
+        0.502,
+        0.503,
+        0.59,
+        0.625,
+        0.719,
+        0.75,
+        0.755,
+        0.758,
+        0.81,
+        0.88,
+        0.922,
+        0.98,
+        1.0,
+        1.003,
+        1.005,
+        1.06,
+        1.125,
+        1.188,
+        1.25,
+        1.531,
+        1.63,
+        3.25,
+        20.88,
+        45.0
+    ],
+    "depths": [],
+    "classified_dimensions": {
+        "tiny_features": [
+            0.15,
+            0.313,
+            0.373,
+            0.3735,
+            0.3745,
+            0.375,
+            0.38,
+            0.381,
+            0.43,
+            0.5,
+            0.502,
+            0.503,
+            0.59,
+            0.625,
+            0.719,
+            0.75,
+            0.755,
+            0.758,
+            0.81,
+            0.88,
+            0.922,
+            0.98,
+            1.0,
+            1.003,
+            1.005,
+            1.06,
+            1.125,
+            1.188,
+            1.25,
+            1.531,
+            1.63
+        ],
+        "small_features": [
+            3.25
+        ],
+        "medium_features": [
+            20.88
+        ],
+        "large_features": [
+            45.0
+        ],
+        "tolerances": [
+            0.0,
+            0.005,
+            0.01,
+            0.03
+        ],
+        "outer_diameters": [],
+        "body_dimensions": [
+            45.0
+        ],
+        "feature_dimensions": [
+            3.25,
+            20.88
+        ],
+        "pcd_dimensions": []
+    }
+}

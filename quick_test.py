@@ -240,6 +240,27 @@ def main():
     cv2.imwrite('debug_gradient.png', gradient)
     cv2.imwrite('debug_final_edges.png', real_edges)
 
+    # --- Also save a named edge image based on sample/view mapping ---
+    SAMPLE_MAP = {
+        # (cad_basename, real_basename) → output edge name
+        ("cad2.png", "real2.png"):  "edges_N001_front.png",
+        ("cad4.png", "real4.png"):  "edges_N001_rear.png",
+        ("cad1.png", "real1.png"):  "edges_BEV820_front.png",
+        ("cad3.png", "real3.png"):  "edges_BEV820_rear.png",
+        # jpeg variants
+        ("cad2.png", "real2.jpeg"): "edges_N001_front.png",
+        ("cad4.png", "real4.jpeg"): "edges_N001_rear.png",
+        ("cad1.png", "real1.jpeg"): "edges_BEV820_front.png",
+        ("cad3.png", "real3.jpeg"): "edges_BEV820_rear.png",
+    }
+    if not multi_mode:
+        cad_base  = Path(cad_path).name
+        real_base = Path(real_path).name
+        named_edge = SAMPLE_MAP.get((cad_base, real_base))
+        if named_edge:
+            cv2.imwrite(named_edge, real_edges)
+            print(f"   [OK] Named edge image saved: {named_edge}")
+
     if multi_mode:
 
         print(f"\nTemplates:")
