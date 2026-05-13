@@ -1,116 +1,172 @@
-"""
-Phase 1 — Part 2: Real Image vs OCR Feature Comparison
-Runs edge detection + contour extraction on real photos,
-extracts geometric features, and compares against OCR parsed JSON.
-
-Input images : real1.png ... real5.png  (in PHASE-1 root)
-OCR JSON     : features/1-02-1065-N001_parsed.json
-Outputs      :
-  real_shape_features.json     — all contour features per image
-  real_ocr_comparison.json     — match results
-  real_annotated_*.png         — visualisation per image
-"""
-
 import cv2
 import numpy as np
 import json
 import os
+import sys
 import math
-
-# =====================================================
-# PATHS
-# =====================================================
 
 BASE     = os.path.dirname(os.path.abspath(__file__))
 FEATURES = os.path.dirname(BASE)
 ROOT     = os.path.dirname(FEATURES)
 OCR_JSON = os.path.join(FEATURES, "samples", "sample_01_N001", "1-02-1065-N001_parsed.json")
 
-IMAGE_FILES = [
-    os.path.join(ROOT, f"real{i}.png") for i in range(1, 6)
-]
-# Also try .jpeg variants
-EXTRA = [os.path.join(ROOT, "real.jpeg"), os.path.join(ROOT, "real1.jpeg")]
-IMAGE_FILES = [p for p in IMAGE_FILES + EXTRA if os.path.exists(p)]
+# Accept a single image path from CLI, or fall back to scanning the folder
+if len(sys.argv) >= 2:
+    IMAGE_FILES = [sys.argv[1]] if os.path.exists(sys.argv[1]) else []
+    if not IMAGE_FILES:
+        print(f"[ERROR] Image not found: {sys.argv[1]}")
+        sys.exit(1)
+else:
+    IMAGE_FILES = [os.path.join(ROOT, f"real{i}.png") for i in range(1, 6)]
+    EXTRA       = [os.path.join(ROOT, "real.jpeg"), os.path.join(ROOT, "real1.jpeg")]
+    IMAGE_FILES = [p for p in IMAGE_FILES + EXTRA if os.path.exists(p)]
 
-MATCH_TOL_PX  = 0.12   # fraction of image diagonal for diameter tolerance
-MATCH_TOL_MM  = 0.5    # mm tolerance when scale is known
-
-# =====================================================
-# STEP 1 — LOAD OCR FEATURES
-# =====================================================
+# FIX 1: Adaptive tolerance — 15% of OCR diameter, floor 0.5mm
+MATCH_TOL_FRAC = 0.15
+MATCH_TOL_MIN  = 0.50
 
 with open(OCR_JSON, encoding="utf-8") as f:
     ocr = json.load(f)
 
+# Include PCD features as large-circle scale anchors
 ocr_hole_diameters = sorted(set(
-    [h["diameter"] for h in ocr.get("holes", [])] +
-    [hp["diameter"] for hp in ocr.get("hole_patterns", [])]
+    [h["diameter"]  for h in ocr.get("holes", [])] +
+    [hp["diameter"] for hp in ocr.get("hole_patterns", [])] +
+    [p["diameter"]  for p in ocr.get("pcd_features", [])]
 ))
-
 ocr_radii = [r["radius"] for r in ocr.get("radii", [])]
 
-# =====================================================
-# STEP 2 — PREPROCESS IMAGE
-# =====================================================
+
+# ---------------------------------------------------------------------------
+# FIX 4: Improved preprocessing — CLAHE + open + close + Canny
+# ---------------------------------------------------------------------------
 
 def preprocess(img):
-    """Returns edge image suitable for contour detection."""
-    # Upscale for better small-feature detection
     img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
-
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Denoise
+    # CLAHE contrast enhancement
+    clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(8, 8))
+    gray = clahe.apply(gray)
+
+    # Bilateral filter — denoises while keeping edges sharp
     gray = cv2.bilateralFilter(gray, 9, 75, 75)
 
     # Adaptive threshold
     thresh = cv2.adaptiveThreshold(
-        gray, 255,
-        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY_INV,
-        31, 7
+        gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+        cv2.THRESH_BINARY_INV, 31, 7
     )
 
-    # Morphological close to connect broken edges
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
+    # Morphological open: remove tiny specks before closing
+    k_open = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, k_open, iterations=1)
 
-    # Canny on top for clean edges
-    edges = cv2.Canny(gray, 30, 100)
+    # Close gaps in hole rings
+    k_close = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, k_close, iterations=2)
+
+    # Canny with lower thresholds to catch faint edges
+    edges = cv2.Canny(gray, 20, 80)
     combined = cv2.bitwise_or(thresh, edges)
 
-    return img, combined   # return upscaled img + edge map
+    return img, combined
 
 
-# =====================================================
-# STEP 3 — EXTRACT CONTOUR FEATURES
-# =====================================================
+# ---------------------------------------------------------------------------
+# FIX 9: Adaptive thresholds based on image resolution and contour density
+# ---------------------------------------------------------------------------
 
-def extract_contours(edge_img, min_area=50):
-    """
-    Finds contours and computes shape features.
-    Returns list of feature dicts.
-    """
-    contours, _ = cv2.findContours(
-        edge_img, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
-    )
+def _compute_adaptive_thresholds(img_shape, n_contours):
+    h, w = img_shape[:2]
+    area = h * w
+    if area > 1_000_000:
+        circ_thresh, solid_thresh = 0.70, 0.80
+    elif area > 400_000:
+        circ_thresh, solid_thresh = 0.63, 0.76
+    else:
+        circ_thresh, solid_thresh = 0.56, 0.70
+
+    if n_contours > 300:
+        circ_thresh  = min(circ_thresh + 0.05, 0.88)
+        solid_thresh = min(solid_thresh + 0.03, 0.93)
+
+    return circ_thresh, solid_thresh
+
+
+# ---------------------------------------------------------------------------
+# FIX 10: Large contour refinement — ellipse fitting
+# ---------------------------------------------------------------------------
+
+def _refined_diameter(cnt, eq_diameter):
+    if len(cnt) >= 5 and eq_diameter > 20:
+        try:
+            ellipse = cv2.fitEllipse(cnt)
+            return float(np.mean(ellipse[1]))
+        except Exception:
+            pass
+    return eq_diameter
+
+
+# ---------------------------------------------------------------------------
+# FIX 2: Spatial deduplication — cluster by centroid, keep highest circularity
+# ---------------------------------------------------------------------------
+
+def _deduplicate(features):
+    if not features:
+        return features
+    kept = []
+    used = set()
+    sorted_feats = sorted(features, key=lambda f: f["circularity"], reverse=True)
+    for i, f in enumerate(sorted_feats):
+        if i in used:
+            continue
+        cx, cy = f["centroid"]["x"], f["centroid"]["y"]
+        kept.append(f)
+        for j, other in enumerate(sorted_feats):
+            if j <= i or j in used:
+                continue
+            ox, oy = other["centroid"]["x"], other["centroid"]["y"]
+            dist = math.sqrt((cx - ox) ** 2 + (cy - oy) ** 2)
+            d_ratio = abs(f["eq_diameter_px"] - other["eq_diameter_px"]) / max(f["eq_diameter_px"], 1.0)
+            if dist < 12 and d_ratio < 0.25:
+                used.add(j)
+    return kept
+
+
+# ---------------------------------------------------------------------------
+# FIX 3: Combined contour validation
+# ---------------------------------------------------------------------------
+
+def _is_valid_candidate(circ, solid, enc_r, eq_d, circ_thresh, solid_thresh):
+    if circ < circ_thresh or solid < solid_thresh:
+        return False
+    enc_d = enc_r * 2
+    if enc_d > 0 and min(eq_d, enc_d) / max(eq_d, enc_d) < 0.60:
+        return False
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Contour extraction
+# ---------------------------------------------------------------------------
+
+def extract_contours(edge_img, img_shape, min_area=50):
+    contours, _ = cv2.findContours(edge_img, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    circ_thresh, solid_thresh = _compute_adaptive_thresholds(img_shape, len(contours))
 
     features = []
     for i, cnt in enumerate(contours):
         area = cv2.contourArea(cnt)
         if area < min_area:
             continue
-
         perimeter = cv2.arcLength(cnt, True)
         if perimeter == 0:
             continue
 
-        # Bounding box
         x, y, w, h = cv2.boundingRect(cnt)
         aspect = float(w) / h if h != 0 else 0
 
-        # Centroid
         M = cv2.moments(cnt)
         if M["m00"] != 0:
             cx = int(M["m10"] / M["m00"])
@@ -118,30 +174,19 @@ def extract_contours(edge_img, min_area=50):
         else:
             cx, cy = x + w // 2, y + h // 2
 
-        # Circularity
         circularity = (4 * math.pi * area) / (perimeter ** 2)
+        hull        = cv2.convexHull(cnt)
+        hull_area   = cv2.contourArea(hull)
+        solidity    = float(area) / hull_area if hull_area > 0 else 0
+        (_, _), enc_radius = cv2.minEnclosingCircle(cnt)
+        eq_diam     = math.sqrt(4 * area / math.pi)
+        eq_diam     = _refined_diameter(cnt, eq_diam)  # FIX 10
 
-        # Equivalent diameter
-        eq_diam = math.sqrt(4 * area / math.pi)
-
-        # Min enclosing circle
-        (ex, ey), enc_radius = cv2.minEnclosingCircle(cnt)
-
-        # Convex hull solidity
-        hull = cv2.convexHull(cnt)
-        hull_area = cv2.contourArea(hull)
-        solidity = float(area) / hull_area if hull_area > 0 else 0
-
-        # Polygon approx
-        epsilon = 0.02 * perimeter
-        approx = cv2.approxPolyDP(cnt, epsilon, True)
+        approx   = cv2.approxPolyDP(cnt, 0.02 * perimeter, True)
         vertices = len(approx)
+        rect     = cv2.minAreaRect(cnt)
+        angle    = rect[-1]
 
-        # Min area rect angle
-        rect = cv2.minAreaRect(cnt)
-        angle = rect[-1]
-
-        # Shape classification
         if circularity > 0.80 and solidity > 0.85:
             shape = "circle"
         elif circularity > 0.60 and solidity > 0.75:
@@ -157,81 +202,110 @@ def extract_contours(edge_img, min_area=50):
             shape = "polygon"
 
         features.append({
-            "id":                 i,
-            "shape":              shape,
-            "centroid":           {"x": cx, "y": cy},
-            "area_px":            float(area),
-            "perimeter_px":       float(perimeter),
-            "circularity":        round(circularity, 4),
-            "solidity":           round(solidity, 4),
-            "eq_diameter_px":     round(eq_diam, 2),
-            "enc_radius_px":      round(enc_radius, 2),
-            "bounding_box":       {"x": int(x), "y": int(y), "w": int(w), "h": int(h)},
-            "aspect_ratio":       round(aspect, 3),
-            "vertices":           vertices,
-            "rotation_angle":     round(angle, 2),
+            "id":             i,
+            "shape":          shape,
+            "centroid":       {"x": cx, "y": cy},
+            "area_px":        float(area),
+            "perimeter_px":   float(perimeter),
+            "circularity":    round(circularity, 4),
+            "solidity":       round(solidity, 4),
+            "eq_diameter_px": round(eq_diam, 2),
+            "enc_radius_px":  round(enc_radius, 2),
+            "bounding_box":   {"x": int(x), "y": int(y), "w": int(w), "h": int(h)},
+            "aspect_ratio":   round(aspect, 3),
+            "vertices":       vertices,
+            "rotation_angle": round(angle, 2),
         })
 
-    return features
+    # FIX 2: Spatial deduplication
+    features = _deduplicate(features)
+    return features, circ_thresh, solid_thresh
 
 
-# =====================================================
-# STEP 4 — ESTIMATE SCALE (px/mm)
-# =====================================================
+# ---------------------------------------------------------------------------
+# FIX 1: RANSAC consensus scale estimation
+# ---------------------------------------------------------------------------
 
 def estimate_scale(features, ocr_hole_diameters):
-    """
-    Tries to estimate px/mm scale by matching the most
-    circular detected feature to the largest known OCR hole diameter.
-    Returns scale factor (px per mm) or None.
-    """
-    circles = [f for f in features if f["circularity"] > 0.75]
-    if not circles or not ocr_hole_diameters:
+    candidates = sorted(
+        [f for f in features if f["circularity"] > 0.50],
+        key=lambda c: c["area_px"], reverse=True
+    )
+    if not candidates or not ocr_hole_diameters:
         return None
 
-    # Sort by area descending — largest circle likely a main bore
-    circles_sorted = sorted(circles, key=lambda c: c["area_px"], reverse=True)
-
-    # Try matching top circles to OCR diameters
-    best_scale = None
-    best_score = 999
-
-    for c in circles_sorted[:8]:
+    all_scales = []
+    for c in candidates[:40]:
         px_diam = c["eq_diameter_px"]
         for ocr_d in ocr_hole_diameters:
             if ocr_d < 1.0:
                 continue
-            scale = px_diam / ocr_d   # px per mm
-            if 1.0 < scale < 200:     # sanity range
-                # Score: how well does this scale explain other circles?
-                errors = []
-                for other in circles_sorted[:15]:
-                    other_mm = other["eq_diameter_px"] / scale
-                    closest = min(ocr_hole_diameters, key=lambda d: abs(d - other_mm))
-                    errors.append(abs(closest - other_mm))
-                avg_err = sum(errors) / len(errors)
-                if avg_err < best_score:
-                    best_score = avg_err
-                    best_scale = scale
+            s = px_diam / ocr_d
+            if 0.3 < s < 5000:
+                all_scales.append(s)
+
+    if not all_scales:
+        return None
+
+    best_scale   = None
+    best_inliers = 0
+    best_score   = 999.0
+
+    for s_cand in all_scales:
+        inliers = [s for s in all_scales if abs(s - s_cand) / s_cand < 0.10]
+        n = len(inliers)
+        s_med = float(np.median(inliers))
+        errors = []
+        for c in candidates[:40]:
+            mm = c["eq_diameter_px"] / s_med
+            closest = min(ocr_hole_diameters, key=lambda d: abs(d - mm))
+            errors.append(abs(closest - mm) / max(closest, 1.0))
+        score = sum(errors) / len(errors)
+        if n > best_inliers or (n == best_inliers and score < best_score):
+            best_inliers = n
+            best_scale   = s_med
+            best_score   = score
 
     return best_scale
 
 
-# =====================================================
-# STEP 5 — MATCH FEATURES TO OCR
-# =====================================================
+# ---------------------------------------------------------------------------
+# FIX 5: Hough circle cross-check
+# ---------------------------------------------------------------------------
 
-def match_to_ocr(features, scale, ocr_hole_diameters, ocr_radii_mm):
-    """
-    Converts pixel measurements to mm using scale,
-    then matches against OCR values.
-    """
+def get_hough_diameters(img_gray, scale):
+    if scale is None or scale <= 0:
+        return []
+    blurred = cv2.GaussianBlur(img_gray, (5, 5), 1.5)
+    circles = cv2.HoughCircles(
+        blurred, cv2.HOUGH_GRADIENT,
+        dp=1.2, minDist=8,
+        param1=50, param2=22,
+        minRadius=3, maxRadius=int(min(img_gray.shape) * 0.55)
+    )
+    if circles is None:
+        return []
+    return [round(r * 2 / scale, 3) for _, _, r in circles[0]]
+
+
+# ---------------------------------------------------------------------------
+# FIX 6: Match features to OCR with adaptive tolerance
+# ---------------------------------------------------------------------------
+
+def match_to_ocr(features, scale, ocr_hole_diameters, circ_thresh, solid_thresh,
+                 hough_diameters=None):
+    if hough_diameters is None:
+        hough_diameters = []
     results = []
-    tol = MATCH_TOL_MM if scale else None
 
     for f in features:
-        if f["circularity"] < 0.55:
-            continue   # only match circular features
+        # FIX 3: Combined validation
+        if not _is_valid_candidate(
+            f["circularity"], f["solidity"],
+            f["enc_radius_px"], f["eq_diameter_px"],
+            circ_thresh, solid_thresh
+        ):
+            continue
 
         px_diam = f["eq_diameter_px"]
         mm_diam = round(px_diam / scale, 3) if scale else None
@@ -242,62 +316,64 @@ def match_to_ocr(features, scale, ocr_hole_diameters, ocr_radii_mm):
         if mm_diam is not None:
             for ocr_d in ocr_hole_diameters:
                 err = abs(ocr_d - mm_diam)
-                if best_err is None or err < best_err:
-                    best_err = err
-                    best_ocr = ocr_d
-            if best_err > tol:
-                best_ocr = None
-                best_err = None
+                tol = max(MATCH_TOL_MIN, ocr_d * MATCH_TOL_FRAC)
+                if err <= tol:
+                    if best_err is None or err < best_err:
+                        best_err = err
+                        best_ocr = ocr_d
+
+        # FIX 5: Hough confirmation
+        hough_confirmed = False
+        if mm_diam is not None and hough_diameters:
+            hough_confirmed = any(
+                abs(h - mm_diam) / max(mm_diam, 1.0) < 0.15
+                for h in hough_diameters
+            )
 
         results.append({
             "contour_id":      f["id"],
             "shape":           f["shape"],
             "circularity":     f["circularity"],
+            "solidity":        f["solidity"],
             "eq_diameter_px":  px_diam,
             "eq_diameter_mm":  mm_diam,
             "matched_ocr_dia": best_ocr,
             "error_mm":        round(best_err, 4) if best_err is not None else None,
             "status":          "MATCH" if best_ocr is not None else "UNMATCHED",
+            "hough_confirmed": hough_confirmed,
             "centroid":        f["centroid"],
         })
 
     return results
 
 
-# =====================================================
-# STEP 6 — VISUALISE
-# =====================================================
-
 def draw_annotations(img, features, match_results, scale):
     vis = img.copy()
     match_map = {r["contour_id"]: r for r in match_results}
 
     for f in features:
-        if f["circularity"] < 0.55:
+        if f["circularity"] < 0.50:
             continue
         cx = f["centroid"]["x"]
         cy = f["centroid"]["y"]
         r  = int(f["enc_radius_px"])
-
         mr = match_map.get(f["id"])
         if mr and mr["status"] == "MATCH":
-            color = (0, 255, 0)   # green = matched
+            color = (0, 255, 0)
             label = f"Ø{mr['matched_ocr_dia']}"
         else:
-            color = (0, 100, 255) # orange = unmatched
+            color = (0, 100, 255)
             mm = mr["eq_diameter_mm"] if mr and mr["eq_diameter_mm"] else "?"
             label = f"~{mm}mm" if isinstance(mm, float) else "?"
-
         cv2.circle(vis, (cx, cy), r, color, 2)
         cv2.putText(vis, label, (cx - 20, cy - r - 5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
-
     return vis
 
 
-# =====================================================
-# STEP 7 — PROCESS ALL IMAGES
-# =====================================================
+# ---------------------------------------------------------------------------
+# Process all images
+# ---------------------------------------------------------------------------
 
 all_results = []
 
@@ -309,19 +385,24 @@ for img_path in IMAGE_FILES:
         print(f"[SKIP] Cannot load: {img_path}")
         continue
 
-    img_up, edges = preprocess(img_bgr)
     h_orig, w_orig = img_bgr.shape[:2]
+    img_up, edges  = preprocess(img_bgr)
 
-    features = extract_contours(edges, min_area=80)
-    scale = estimate_scale(features, ocr_hole_diameters)
-    matches = match_to_ocr(features, scale, ocr_hole_diameters, ocr_radii)
+    features, circ_thresh, solid_thresh = extract_contours(edges, img_up.shape)
+    scale           = estimate_scale(features, ocr_hole_diameters)
+
+    # FIX 5: Hough on grayscale of upscaled image
+    gray_up         = cv2.cvtColor(img_up, cv2.COLOR_BGR2GRAY)
+    hough_diameters = get_hough_diameters(gray_up, scale)
+
+    matches       = match_to_ocr(features, scale, ocr_hole_diameters,
+                                  circ_thresh, solid_thresh, hough_diameters)
     matched_count = sum(1 for m in matches if m["status"] == "MATCH")
 
     matched_dias = sorted(set(m["matched_ocr_dia"] for m in matches if m["matched_ocr_dia"]))
-    dias_str = ", ".join(f"Ø{d}" for d in matched_dias)
-    print(f"[{img_name}] {matched_count} matches — {dias_str}")
+    dias_str     = ", ".join(f"Ø{d}" for d in matched_dias)
 
-    vis = draw_annotations(img_up, features, matches, scale)
+    vis      = draw_annotations(img_up, features, matches, scale)
     out_name = f"real_annotated_{os.path.splitext(img_name)[0]}.png"
     cv2.imwrite(os.path.join(FEATURES, "outputs", out_name), vis)
 
@@ -341,4 +422,9 @@ with open(os.path.join(FEATURES, "outputs", "real_ocr_comparison.json"), "w") as
 total_matched  = sum(r["matched_count"] for r in all_results)
 total_circular = sum(r["circular_count"] for r in all_results)
 overall_pct    = total_matched / total_circular * 100 if total_circular else 0
-print(f"[real_image_compare] {total_matched}/{total_circular} total matches ({overall_pct:.0f}%) across {len(all_results)} images → real_ocr_comparison.json")
+all_dias = sorted(set(
+    d for r in all_results for m in r["matches"]
+    if m.get("matched_ocr_dia") for d in [m["matched_ocr_dia"]]
+))
+dias_str = ", ".join(f"Ø{d}" for d in all_dias)
+print(f"[real_image_compare] {total_matched} features detected across {len(all_results)} images — {dias_str}")

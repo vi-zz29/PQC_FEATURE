@@ -58,32 +58,12 @@
             "depth": null
         },
         {
-            "diameter": 80.0,
-            "through": false,
-            "depth": null
-        },
-        {
-            "diameter": 10.0,
-            "through": false,
-            "depth": null
-        },
-        {
             "diameter": 7.0,
             "through": false,
             "depth": null
         },
         {
             "diameter": 5.0,
-            "through": false,
-            "depth": null
-        },
-        {
-            "diameter": 96.0,
-            "through": false,
-            "depth": null
-        },
-        {
-            "diameter": 60.0,
             "through": false,
             "depth": null
         }

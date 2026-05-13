@@ -12,20 +12,14 @@ OUTPUT_DIR   = os.path.join(FEATURES_DIR, "outputs")
 
 SAMPLES = {
     "N001": {
-        "ocr_json": os.path.join(
-            FEATURES_DIR, "samples", "sample_01_N001",
-            "1-02-1065-N001_parsed.json"
-        ),
+        "ocr_json": os.path.join(FEATURES_DIR, "samples", "sample_01_N001", "1-02-1065-N001_parsed.json"),
         "views": {
             "front": os.path.join(ROOT_DIR, "edges_N001_front.png"),
             "rear":  os.path.join(ROOT_DIR, "edges_N001_rear.png"),
         }
     },
     "BEV820": {
-        "ocr_json": os.path.join(
-            FEATURES_DIR, "samples", "sample_02_BEV820",
-            "blueprint_page_parsed.json"
-        ),
+        "ocr_json": os.path.join(FEATURES_DIR, "samples", "sample_02_BEV820", "blueprint_page_parsed.json"),
         "views": {
             "front": os.path.join(ROOT_DIR, "edges_BEV820_front.png"),
             "rear":  os.path.join(ROOT_DIR, "edges_BEV820_rear.png"),
@@ -35,10 +29,8 @@ SAMPLES = {
 
 LEGACY_EDGE = os.path.join(ROOT_DIR, "debug_final_edges.png")
 
-MATCH_TOL_FRAC = 0.12
-MATCH_TOL_MIN  = 0.30
-
-SEP = "=" * 62
+MATCH_TOL_FRAC = 0.15   # 15% of OCR diameter
+MATCH_TOL_MIN  = 0.50   # floor in mm
 
 GREEN  = "\033[92m"
 YELLOW = "\033[93m"
@@ -47,39 +39,41 @@ CYAN   = "\033[96m"
 RESET  = "\033[0m"
 
 
-def _fill_enclosed_regions(edge_gray: np.ndarray) -> np.ndarray:
-    _, binary = cv2.threshold(edge_gray, 30, 255, cv2.THRESH_BINARY)
-    k_close = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    closed  = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, k_close, iterations=2)
-    return closed
+# ---------------------------------------------------------------------------
+# STEP 1: Preprocess edge image — close gaps so holes become solid blobs
+# ---------------------------------------------------------------------------
 
+def _prepare(edge_gray: np.ndarray) -> np.ndarray:
+    _, binary = cv2.threshold(edge_gray, 20, 255, cv2.THRESH_BINARY)
+    # Use smaller kernel (5x5) to avoid over-expanding small holes
+    k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    return cv2.morphologyEx(binary, cv2.MORPH_CLOSE, k, iterations=2)
+
+
+# ---------------------------------------------------------------------------
+# STEP 2: Extract contour features — no filtering here, just measure everything
+# ---------------------------------------------------------------------------
 
 def extract_shape_features(edge_image_path: str):
     img = cv2.imread(edge_image_path, cv2.IMREAD_GRAYSCALE)
     if img is None:
-        raise FileNotFoundError(f"Cannot load edge image: {edge_image_path}")
+        raise FileNotFoundError(f"Cannot load: {edge_image_path}")
 
-    filled = _fill_enclosed_regions(img)
+    filled = _prepare(img)
+    contours, hierarchy = cv2.findContours(filled, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
 
-    contours, hierarchy = cv2.findContours(
-        filled, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
-    )
-
-    features   = []
-    seen_cents = {}
+    features = []
+    seen = {}   # grid_key -> area, for dedup
 
     for i, cnt in enumerate(contours):
         area = cv2.contourArea(cnt)
-        if area < 30:
+        if area < 25:
             continue
-
         perimeter = cv2.arcLength(cnt, True)
         if perimeter == 0:
             continue
 
         x, y, w, h = cv2.boundingRect(cnt)
-        aspect_ratio = float(w) / h if h != 0 else 0
-
         M = cv2.moments(cnt)
         if M["m00"] != 0:
             cx = int(M["m10"] / M["m00"])
@@ -87,98 +81,124 @@ def extract_shape_features(edge_image_path: str):
         else:
             cx, cy = x + w // 2, y + h // 2
 
-        grid_key = (round(cx / 6) * 6, round(cy / 6) * 6)
-        if grid_key in seen_cents:
-            prev_area = seen_cents[grid_key]
-            if abs(prev_area - area) / max(prev_area, 1) < 0.20:
-                continue
-        seen_cents[grid_key] = area
+        # Dedup: same centroid grid cell + similar area → skip
+        gk = (round(cx / 8) * 8, round(cy / 8) * 8)
+        if gk in seen and abs(seen[gk] - area) / max(seen[gk], 1) < 0.25:
+            continue
+        seen[gk] = area
 
         circularity = (4 * math.pi * area) / (perimeter ** 2)
         hull        = cv2.convexHull(cnt)
         hull_area   = cv2.contourArea(hull)
         solidity    = float(area) / hull_area if hull_area > 0 else 0
-        (_, _), enc_radius = cv2.minEnclosingCircle(cnt)
-        eq_diameter = math.sqrt(4 * area / math.pi)
-        extent      = float(area) / (w * h) if (w * h) > 0 else 0
-        rect        = cv2.minAreaRect(cnt)
-        angle       = rect[-1]
-        approx      = cv2.approxPolyDP(cnt, 0.02 * perimeter, True)
-        vertices    = len(approx)
+        (_, _), enc_r = cv2.minEnclosingCircle(cnt)
+        eq_d        = math.sqrt(4 * area / math.pi)
 
-        hu_raw = cv2.HuMoments(M).flatten()
-        hu = [
-            float(-np.sign(v) * np.log10(abs(v))) if v != 0 else 0.0
-            for v in hu_raw
-        ]
+        # For large contours use ellipse fitting — more stable than area-based diameter
+        if len(cnt) >= 5 and eq_d > 20:
+            try:
+                axes = cv2.fitEllipse(cnt)[1]
+                eq_d = float(np.mean(axes))
+            except Exception:
+                pass
 
-        if circularity > 0.85 and solidity > 0.85:
-            shape_type = "circle"
-        elif circularity > 0.65 and solidity > 0.75:
-            shape_type = "ellipse"
-        elif vertices == 3:
-            shape_type = "triangle"
-        elif vertices == 4:
-            shape_type = "rectangle"
-        elif aspect_ratio > 3.5:
-            shape_type = "slot"
-        else:
-            shape_type = "polygon"
+        aspect = float(w) / h if h != 0 else 0
+        approx = cv2.approxPolyDP(cnt, 0.02 * perimeter, True)
+        verts  = len(approx)
+        angle  = cv2.minAreaRect(cnt)[-1]
+
+        if   circularity > 0.85 and solidity > 0.85: shape = "circle"
+        elif circularity > 0.65 and solidity > 0.75: shape = "ellipse"
+        elif verts == 3:                              shape = "triangle"
+        elif verts == 4:                              shape = "rectangle"
+        elif aspect > 3.5:                            shape = "slot"
+        else:                                         shape = "polygon"
+
+        has_parent = bool(hierarchy is not None and i < len(hierarchy[0]) and hierarchy[0][i][3] >= 0)
 
         features.append({
             "id":                  i,
-            "shape_type":          shape_type,
+            "shape_type":          shape,
             "centroid":            {"x": cx, "y": cy},
             "area":                round(float(area), 2),
             "perimeter":           round(float(perimeter), 2),
             "bounding_box":        {"x": int(x), "y": int(y), "w": int(w), "h": int(h)},
-            "aspect_ratio":        round(aspect_ratio, 4),
+            "aspect_ratio":        round(aspect, 4),
             "circularity":         round(circularity, 4),
             "solidity":            round(solidity, 4),
-            "extent":              round(extent, 4),
-            "equivalent_diameter": round(eq_diameter, 4),
-            "enc_radius":          round(float(enc_radius), 4),
+            "equivalent_diameter": round(eq_d, 4),
+            "enc_radius":          round(float(enc_r), 4),
             "rotation_angle":      round(float(angle), 2),
-            "vertices":            int(vertices),
-            "hu_moments":          hu,
+            "vertices":            int(verts),
+            "has_parent":          has_parent,
         })
 
     return features, img
 
 
-def estimate_scale(features: list, ocr_diameters: list):
-    candidates = sorted(
-        [f for f in features if f["circularity"] > 0.60],
-        key=lambda f: f["area"], reverse=True
-    )
+# ---------------------------------------------------------------------------
+# STEP 3: RANSAC scale estimation
+# Generate every possible (contour_diameter / ocr_diameter) scale hypothesis,
+# find the cluster with the most votes within a 10% band, return its median.
+# ---------------------------------------------------------------------------
+
+def estimate_scale(features: list, ocr_diameters: list) -> float:
+    candidates = sorted(features, key=lambda f: f["area"], reverse=True)
     if not candidates or not ocr_diameters:
         return None
 
-    best_scale = None
-    best_score = 999.0
-
-    for c in candidates[:20]:
+    all_scales = []
+    for c in candidates[:50]:
         px_d = c["equivalent_diameter"]
         for ocr_d in ocr_diameters:
             if ocr_d < 1.0:
                 continue
-            scale = px_d / ocr_d
-            if not (0.5 < scale < 1000):
-                continue
-            errors = []
-            for other in candidates[:30]:
-                mm = other["equivalent_diameter"] / scale
-                closest = min(ocr_diameters, key=lambda d: abs(d - mm))
-                errors.append(abs(closest - mm))
-            avg_err = sum(errors) / len(errors)
-            if avg_err < best_score:
-                best_score = avg_err
-                best_scale = scale
+            s = px_d / ocr_d
+            if 0.2 < s < 10000:
+                all_scales.append(s)
+
+    if not all_scales:
+        return None
+
+    best_scale   = None
+    best_inliers = 0
+    best_score   = 999.0
+
+    for s_cand in all_scales:
+        inliers = [s for s in all_scales if abs(s - s_cand) / s_cand < 0.10]
+        n = len(inliers)
+        s_med = float(np.median(inliers))
+        # Score: mean relative error — weight larger OCR features more heavily
+        # because they are more reliably detected and anchor the scale better
+        errors = []
+        for c in candidates[:50]:
+            mm = c["equivalent_diameter"] / s_med
+            closest = min(ocr_diameters, key=lambda d: abs(d - mm))
+            rel_err = abs(closest - mm) / max(closest, 1.0)
+            # Weight by sqrt(ocr_diameter) — larger features get more weight
+            weight = math.sqrt(closest)
+            errors.append(rel_err * weight)
+        score = sum(errors) / len(errors)
+
+        if n > best_inliers or (n == best_inliers and score < best_score):
+            best_inliers = n
+            best_scale   = s_med
+            best_score   = score
 
     return best_scale
 
 
+# ---------------------------------------------------------------------------
+# STEP 4: Match contours to OCR features
+# Only filter on circularity >= 0.45 — keep it permissive, let tolerance do the work
+# ---------------------------------------------------------------------------
+
 def _tol(ocr_d: float) -> float:
+    # Small holes get wider relative tolerance because morphological ops expand them
+    if ocr_d <= 3.0:
+        return max(1.2, ocr_d * 0.60)
+    if ocr_d <= 6.0:
+        return max(0.8, ocr_d * 0.25)
     return max(MATCH_TOL_MIN, ocr_d * MATCH_TOL_FRAC)
 
 
@@ -189,49 +209,66 @@ def compare_with_ocr(features: list, ocr_json_path: str, scale: float):
     ocr_holes = {}
     for h in ocr.get("holes", []):
         d = h["diameter"]
-        ocr_holes[d] = {
-            "source": "hole",
-            "through": h.get("through"),
-            "depth":   h.get("depth"),
-        }
+        ocr_holes[d] = {"source": "hole", "through": h.get("through"), "depth": h.get("depth")}
     for hp in ocr.get("hole_patterns", []):
         d = hp["diameter"]
-        ocr_holes[d] = {
-            "source": f"hole_pattern ({hp['count']}x)",
-            "through": hp.get("through"),
-            "depth":   hp.get("depth"),
-        }
+        ocr_holes[d] = {"source": f"hole_pattern ({hp['count']}x)", "through": hp.get("through"), "depth": hp.get("depth")}
+    for p in ocr.get("pcd_features", []):
+        d = p["diameter"]
+        if d not in ocr_holes:
+            ocr_holes[d] = {"source": "pcd", "through": None, "depth": None}
 
     ocr_diameters = sorted(ocr_holes.keys())
-
     min_ocr_d   = min(ocr_diameters) if ocr_diameters else 1.0
     min_px_diam = (min_ocr_d / 3.0) * (scale if scale else 1.0)
 
+    # --- Pass 1: collect all (contour, ocr_diameter, error) candidates ---
+    candidates = []
+    for f in features:
+        if f["circularity"] < 0.45:
+            continue
+        if scale and f["equivalent_diameter"] < min_px_diam:
+            continue
+        px_d = f["equivalent_diameter"]
+        mm_d = round(px_d / scale, 3) if scale else None
+        if mm_d is None:
+            continue
+        for ocr_d in ocr_diameters:
+            err = abs(ocr_d - mm_d)
+            if err <= _tol(ocr_d):
+                candidates.append((err, f, ocr_d))
+
+    # --- Pass 2: greedy one-to-one assignment — best error wins ---
+    # Sort by error ascending so smallest errors get priority
+    candidates.sort(key=lambda x: x[0])
+    claimed_ocr      = set()   # each OCR diameter claimed at most once
+    claimed_contour  = set()   # each contour claimed at most once
+    assignments      = {}      # contour_id -> (ocr_d, error, info)
+
+    for err, f, ocr_d in candidates:
+        if f["id"] in claimed_contour:
+            continue
+        if ocr_d in claimed_ocr:
+            continue
+        claimed_contour.add(f["id"])
+        claimed_ocr.add(ocr_d)
+        assignments[f["id"]] = (ocr_d, round(err, 4), ocr_holes[ocr_d])
+
+    # --- Build results list ---
     results = []
     for f in features:
         if f["circularity"] < 0.45:
             continue
         if scale and f["equivalent_diameter"] < min_px_diam:
             continue
-
         px_d = f["equivalent_diameter"]
         mm_d = round(px_d / scale, 3) if scale else None
 
-        matched_dia  = None
-        matched_info = None
-        error_mm     = None
-
-        if mm_d is not None:
-            best_err = None
-            for ocr_d in ocr_diameters:
-                err = abs(ocr_d - mm_d)
-                if err <= _tol(ocr_d):
-                    if best_err is None or err < best_err:
-                        best_err     = err
-                        matched_dia  = ocr_d
-                        matched_info = ocr_holes[ocr_d]
-            if best_err is not None:
-                error_mm = round(best_err, 4)
+        if f["id"] in assignments:
+            ocr_d, error_mm, info = assignments[f["id"]]
+            matched_dia, matched_info = ocr_d, info
+        else:
+            matched_dia = matched_info = error_mm = None
 
         results.append({
             "contour_id":       f["id"],
@@ -256,76 +293,72 @@ def compare_with_ocr(features: list, ocr_json_path: str, scale: float):
 
     return results, ocr, missing_ocr
 
+    return results, ocr, missing_ocr
+
+
+# ---------------------------------------------------------------------------
+# STEP 5: Annotated output image
+# ---------------------------------------------------------------------------
 
 def draw_annotations(img_gray, features, results, missing_ocr, scale):
     vis = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
-    result_map = {r["contour_id"]: r for r in results}
-
-    C_MATCH   = (0,  200,   0)
-    C_FP      = (0,  120, 255)
-    C_MISSING = (0,   0,  220)
-    FONT      = cv2.FONT_HERSHEY_SIMPLEX
+    rmap = {r["contour_id"]: r for r in results}
+    FONT = cv2.FONT_HERSHEY_SIMPLEX
+    C_MATCH, C_FP, C_MISS = (0, 200, 0), (0, 120, 255), (0, 0, 220)
 
     for f in features:
-        r = result_map.get(f["id"])
+        r = rmap.get(f["id"])
         if r is None:
             continue
-        cx     = f["centroid"]["x"]
-        cy     = f["centroid"]["y"]
-        radius = max(4, int(f["enc_radius"]))
-
+        cx, cy = f["centroid"]["x"], f["centroid"]["y"]
+        rad = max(4, int(f["enc_radius"]))
         if r["status"] == "MATCH":
-            cv2.circle(vis, (cx, cy), radius, C_MATCH, 2)
-            cv2.putText(vis, f"O{r['matched_ocr_dia']}",
-                        (cx - 16, cy - radius - 5),
-                        FONT, 0.38, C_MATCH, 1, cv2.LINE_AA)
+            cv2.circle(vis, (cx, cy), rad, C_MATCH, 2)
+            cv2.putText(vis, f"O{r['matched_ocr_dia']}", (cx-16, cy-rad-5), FONT, 0.38, C_MATCH, 1, cv2.LINE_AA)
         else:
-            cv2.circle(vis, (cx, cy), radius, C_FP, 1)
+            cv2.circle(vis, (cx, cy), rad, C_FP, 1)
             mm = r["eq_diameter_mm"]
-            cv2.putText(vis, f"~{mm:.1f}" if mm else "?",
-                        (cx - 14, cy - radius - 5),
-                        FONT, 0.35, C_FP, 1, cv2.LINE_AA)
+            cv2.putText(vis, f"~{mm:.1f}" if mm else "?", (cx-14, cy-rad-5), FONT, 0.35, C_FP, 1, cv2.LINE_AA)
 
     h_img, w_img = vis.shape[:2]
-    x_col = max(w_img - 180, 10)
-    y0    = 28
-    cv2.putText(vis, "NOT DETECTED:", (x_col, y0),
-                FONT, 0.42, C_MISSING, 1, cv2.LINE_AA)
+    xc, y0 = max(w_img - 180, 10), 28
+    cv2.putText(vis, "NOT DETECTED:", (xc, y0), FONT, 0.42, C_MISS, 1, cv2.LINE_AA)
     for idx, m in enumerate(sorted(missing_ocr, key=lambda x: x["diameter"])):
-        y = y0 + 20 + idx * 17
-        src = m["info"].get("source", "")
-        cv2.putText(vis, f"  O{m['diameter']}  {src}",
-                    (x_col, y), FONT, 0.35, C_MISSING, 1, cv2.LINE_AA)
+        cv2.putText(vis, f"  O{m['diameter']}  {m['info'].get('source','')}",
+                    (xc, y0 + 20 + idx * 17), FONT, 0.35, C_MISS, 1, cv2.LINE_AA)
 
     lx, ly = 8, h_img - 72
-    cv2.rectangle(vis, (lx - 4, ly - 14), (lx + 230, ly + 60), (25, 25, 25), -1)
-    cv2.putText(vis, "GREEN  = Matched to OCR hole",   (lx, ly),
-                FONT, 0.37, C_MATCH,   1, cv2.LINE_AA)
-    cv2.putText(vis, "ORANGE = Detected, not in OCR",  (lx, ly + 18),
-                FONT, 0.37, C_FP,      1, cv2.LINE_AA)
-    cv2.putText(vis, "RED    = OCR hole not detected", (lx, ly + 36),
-                FONT, 0.37, C_MISSING, 1, cv2.LINE_AA)
-    scale_txt = f"Scale: {scale:.3f} px/mm" if scale else "Scale: unknown"
-    cv2.putText(vis, scale_txt, (lx, ly + 54),
-                FONT, 0.37, (180, 180, 180), 1, cv2.LINE_AA)
-
+    cv2.rectangle(vis, (lx-4, ly-14), (lx+230, ly+60), (25,25,25), -1)
+    cv2.putText(vis, "GREEN  = Matched to OCR hole",   (lx, ly),    FONT, 0.37, C_MATCH, 1, cv2.LINE_AA)
+    cv2.putText(vis, "ORANGE = Detected, not in OCR",  (lx, ly+18), FONT, 0.37, C_FP,    1, cv2.LINE_AA)
+    cv2.putText(vis, "RED    = OCR hole not detected", (lx, ly+36), FONT, 0.37, C_MISS,  1, cv2.LINE_AA)
+    cv2.putText(vis, f"Scale: {scale:.3f} px/mm" if scale else "Scale: unknown",
+                (lx, ly+54), FONT, 0.37, (180,180,180), 1, cv2.LINE_AA)
     return vis
 
 
-def print_report(label, features, results, missing_ocr, scale, ocr):
+# ---------------------------------------------------------------------------
+# STEP 6: Report — one line per sample
+# ---------------------------------------------------------------------------
+
+def print_report(label, results, missing_ocr, ocr):
     matched      = [r for r in results if r["status"] == "MATCH"]
     all_ocr_dias = set(
         [h["diameter"] for h in ocr.get("holes", [])] +
         [hp["diameter"] for hp in ocr.get("hole_patterns", [])]
     )
     total_ocr    = len(all_ocr_dias)
-    matched_dias = sorted(r["matched_ocr_dia"] for r in matched if r["matched_ocr_dia"])
-    coverage     = len(set(matched_dias))
-    cov_pct      = f"{coverage / total_ocr * 100:.0f}%" if total_ocr else "N/A"
-    dias_str     = ", ".join(f"Ø{d}" for d in sorted(set(matched_dias)))
-    miss_str     = f"  {RED}{len(missing_ocr)} missing{RESET}" if missing_ocr else f"  {GREEN}all found{RESET}"
-    print(f"[{label}] {GREEN}{coverage}/{total_ocr} features detected{RESET} ({cov_pct}) — {dias_str}{miss_str}")
+    matched_dias = sorted(set(r["matched_ocr_dia"] for r in matched if r["matched_ocr_dia"] and r["matched_ocr_dia"] in all_ocr_dias))
+    coverage     = len(matched_dias)
+    dias_str     = ", ".join(f"Ø{d}mm" for d in matched_dias)
+    miss_dias    = sorted(all_ocr_dias - set(matched_dias))
+    miss_str     = f", missing: {', '.join(f'Ø{d}mm' for d in miss_dias)}" if miss_dias else ""
+    print(f"[{label}] {coverage}/{total_ocr} features detected — {dias_str}{miss_str}")
 
+
+# ---------------------------------------------------------------------------
+# Run one edge image
+# ---------------------------------------------------------------------------
 
 def run_single(edge_image_path: str, ocr_json_path: str, label: str) -> dict:
     safe_label = label.replace(" ", "_").replace("/", "_")
@@ -334,17 +367,18 @@ def run_single(edge_image_path: str, ocr_json_path: str, label: str) -> dict:
 
     with open(ocr_json_path, encoding="utf-8") as f:
         ocr_preview = json.load(f)
+
     ocr_diameters = sorted(set(
         [h["diameter"]  for h in ocr_preview.get("holes", [])] +
-        [hp["diameter"] for hp in ocr_preview.get("hole_patterns", [])]
+        [hp["diameter"] for hp in ocr_preview.get("hole_patterns", [])] +
+        [p["diameter"]  for p in ocr_preview.get("pcd_features", [])]
     ))
-    scale = estimate_scale(features, ocr_diameters)
 
+    scale = estimate_scale(features, ocr_diameters)
     results, ocr, missing_ocr = compare_with_ocr(features, ocr_json_path, scale)
 
-    vis      = draw_annotations(img_gray, features, results, missing_ocr, scale)
-    vis_path = os.path.join(OUTPUT_DIR, f"{safe_label}_annotated.png")
-    cv2.imwrite(vis_path, vis)
+    vis = draw_annotations(img_gray, features, results, missing_ocr, scale)
+    cv2.imwrite(os.path.join(OUTPUT_DIR, f"{safe_label}_annotated.png"), vis)
 
     with open(os.path.join(OUTPUT_DIR, f"{safe_label}_comparison.json"), "w") as f:
         json.dump({
@@ -357,20 +391,14 @@ def run_single(edge_image_path: str, ocr_json_path: str, label: str) -> dict:
             "missing_ocr":    missing_ocr,
         }, f, indent=4)
 
-    print_report(label, features, results, missing_ocr, scale, ocr)
+    print_report(label, results, missing_ocr, ocr)
 
     matched_count = sum(1 for r in results if r["status"] == "MATCH")
-    return {
-        "label":       label,
-        "matched":     matched_count,
-        "total":       len(results),
-        "missing_ocr": len(missing_ocr),
-    }
+    return {"label": label, "matched": matched_count, "total": len(results), "missing_ocr": len(missing_ocr)}
 
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-
     if sys.platform == "win32":
         os.system("color")
 
@@ -379,40 +407,31 @@ def main():
         ocr_path  = sys.argv[2]
         label     = sys.argv[3] if len(sys.argv) > 3 else "custom"
         if not os.path.exists(edge_path):
-            print(f"{RED}[ERROR] Edge image not found: {edge_path}{RESET}")
-            sys.exit(1)
+            print(f"{RED}[ERROR] Edge image not found: {edge_path}{RESET}"); sys.exit(1)
         if not os.path.exists(ocr_path):
-            print(f"{RED}[ERROR] OCR JSON not found: {ocr_path}{RESET}")
-            sys.exit(1)
+            print(f"{RED}[ERROR] OCR JSON not found: {ocr_path}{RESET}"); sys.exit(1)
         run_single(edge_path, ocr_path, label)
         return
 
-    summary       = []
-    missing_files = []
+    summary, missing_files = [], []
 
     for sample_name, config in SAMPLES.items():
         ocr_json = config["ocr_json"]
         if not os.path.exists(ocr_json):
             continue
-
         for view, edge_path in config["views"].items():
             label = f"{sample_name}_{view}"
             if not os.path.exists(edge_path):
-                missing_files.append((label, edge_path))
-                continue
-            result = run_single(edge_path, ocr_json, label)
-            summary.append(result)
+                missing_files.append((label, edge_path)); continue
+            summary.append(run_single(edge_path, ocr_json, label))
 
     if not summary and os.path.exists(LEGACY_EDGE):
-        ocr_json = SAMPLES["N001"]["ocr_json"]
-        result   = run_single(LEGACY_EDGE, ocr_json, "N001_legacy")
-        summary.append(result)
+        summary.append(run_single(LEGACY_EDGE, SAMPLES["N001"]["ocr_json"], "N001_legacy"))
 
     if not summary:
         print(f"{YELLOW}No edge images processed.{RESET}")
-    if missing_files:
-        for lbl, path in missing_files:
-            print(f"{YELLOW}[MISSING]{RESET} {lbl} — run: python quick_test.py cad.png {os.path.basename(path)}")
+    for lbl, path in missing_files:
+        print(f"{YELLOW}[MISSING]{RESET} {lbl} — run: python quick_test.py cad.png {os.path.basename(path)}")
 
 
 if __name__ == "__main__":

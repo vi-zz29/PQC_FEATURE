@@ -320,22 +320,31 @@ def extract_holes(text: str):
         })
 
     # Simple holes: Ø D [THRU | DEPTH d]
-    # Exclude anything followed by PCD, SLOTS, or that is a known body diameter
+    # Exclude PCD circles, slot features, and large body bores (>= 20mm without THRU/DEPTH)
     pattern_simple = re.compile(
         r'(?<!\d[xX×]\s)Ø\s*(\d+(?:\.\d+)?)'
         r'(?:\s+(THRU|THROUGH)|\s+DEPTH\s+(\d+(?:\.\d+)?))?',
         re.IGNORECASE
     )
+    # Build a set of PCD diameters to exclude
+    pcd_pattern_excl = re.compile(r'(\d+(?:\.\d+)?)\s*PCD', re.IGNORECASE)
+    pcd_diameters = {round(float(m.group(1)), 4) for m in pcd_pattern_excl.finditer(text)}
+    # Build a set of SLOT diameters to exclude
+    slot_pattern_excl = re.compile(r'Ø?\s*(\d+(?:\.\d+)?)\s+SLOTS?', re.IGNORECASE)
+    slot_diameters = {round(float(m.group(1)), 4) for m in slot_pattern_excl.finditer(text)}
+
     for m in pattern_simple.finditer(text):
         dia = round(float(m.group(1)), 4)
         if dia > 500:
             continue
-        # Skip PCD circles and slot features — not drilled holes
-        after = text[m.end():m.end() + 10].strip().upper()
-        if after.startswith("PCD") or after.startswith("SLOT"):
+        # Skip known PCD and slot diameters
+        if dia in pcd_diameters or dia in slot_diameters:
             continue
+        # Skip large unqualified diameters (>= 20mm) that have no THRU or DEPTH — these are bores/bodies
         through = bool(m.group(2))
         depth = float(m.group(3)) if m.group(3) else None
+        if dia >= 20.0 and not through and depth is None:
+            continue
         holes.append({
             "diameter": dia,
             "through": through,

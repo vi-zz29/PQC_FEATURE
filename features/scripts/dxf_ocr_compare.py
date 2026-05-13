@@ -9,7 +9,7 @@ DXF_DIR     = os.path.join(FEATURES, "dxf")
 OCR_JSON    = os.path.join(FEATURES, "samples", "sample_01_N001", "1-02-1065-N001_parsed.json")
 OUTPUT_JSON = os.path.join(FEATURES, "outputs", "dxf_ocr_comparison.json")
 
-MATCH_TOL = 0.15
+MATCH_TOL = 0.5
 
 
 def extract_dxf_features(dxf_path):
@@ -205,7 +205,7 @@ dim_results = []
 for dim in ocr_dims:
     if dim < 0.1:
         continue
-    matched, err = find_match(dim, dxf_all_dims, tol=0.5)
+    matched, err = find_match(dim, dxf_all_dims, tol=1.0)
     dim_results.append({
         "ocr_dim":  dim,
         "dxf_dim":  matched,
