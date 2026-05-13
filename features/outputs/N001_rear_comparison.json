@@ -1,0 +1,927 @@
+{
+    "label": "N001_rear",
+    "edge_image": "C:\\Users\\vaishnavi\\Downloads\\PHASE-1\\edges_N001_rear.png",
+    "ocr_json": "C:\\Users\\vaishnavi\\Downloads\\PHASE-1\\features\\samples\\sample_01_N001\\1-02-1065-N001_parsed.json",
+    "scale_px_mm": 5.4633,
+    "total_features": 67,
+    "results": [
+        {
+            "contour_id": 7,
+            "shape_type": "polygon",
+            "circularity": 0.4517,
+            "solidity": 0.7624,
+            "eq_diameter_px": 7.0,
+            "eq_diameter_mm": 1.282,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 649,
+                "y": 741
+            }
+        },
+        {
+            "contour_id": 8,
+            "shape_type": "polygon",
+            "circularity": 0.5413,
+            "solidity": 0.822,
+            "eq_diameter_px": 7.86,
+            "eq_diameter_mm": 1.438,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 620,
+                "y": 737
+            }
+        },
+        {
+            "contour_id": 10,
+            "shape_type": "polygon",
+            "circularity": 0.5918,
+            "solidity": 0.9254,
+            "eq_diameter_px": 6.28,
+            "eq_diameter_mm": 1.15,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 669,
+                "y": 703
+            }
+        },
+        {
+            "contour_id": 15,
+            "shape_type": "polygon",
+            "circularity": 0.4757,
+            "solidity": 0.7632,
+            "eq_diameter_px": 7.44,
+            "eq_diameter_mm": 1.362,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 656,
+                "y": 570
+            }
+        },
+        {
+            "contour_id": 16,
+            "shape_type": "polygon",
+            "circularity": 0.612,
+            "solidity": 0.9513,
+            "eq_diameter_px": 20.25,
+            "eq_diameter_mm": 3.706,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.294,
+            "status": "MATCH",
+            "centroid": {
+                "x": 436,
+                "y": 499
+            }
+        },
+        {
+            "contour_id": 17,
+            "shape_type": "ellipse",
+            "circularity": 0.8459,
+            "solidity": 0.9658,
+            "eq_diameter_px": 11.99,
+            "eq_diameter_mm": 2.196,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.196,
+            "status": "MATCH",
+            "centroid": {
+                "x": 427,
+                "y": 500
+            }
+        },
+        {
+            "contour_id": 18,
+            "shape_type": "circle",
+            "circularity": 0.895,
+            "solidity": 0.984,
+            "eq_diameter_px": 25.03,
+            "eq_diameter_mm": 4.581,
+            "matched_ocr_dia": 4.5,
+            "ocr_feature_info": {
+                "source": "hole_pattern (3x)",
+                "through": true,
+                "depth": null
+            },
+            "error_mm": 0.081,
+            "status": "MATCH",
+            "centroid": {
+                "x": 284,
+                "y": 454
+            }
+        },
+        {
+            "contour_id": 19,
+            "shape_type": "ellipse",
+            "circularity": 0.8498,
+            "solidity": 0.9658,
+            "eq_diameter_px": 15.86,
+            "eq_diameter_mm": 2.903,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 286,
+                "y": 454
+            }
+        },
+        {
+            "contour_id": 20,
+            "shape_type": "polygon",
+            "circularity": 0.485,
+            "solidity": 0.7753,
+            "eq_diameter_px": 6.63,
+            "eq_diameter_mm": 1.213,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 708,
+                "y": 430
+            }
+        },
+        {
+            "contour_id": 21,
+            "shape_type": "ellipse",
+            "circularity": 0.7929,
+            "solidity": 0.9709,
+            "eq_diameter_px": 524.48,
+            "eq_diameter_mm": 96.0,
+            "matched_ocr_dia": 96.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.0,
+            "status": "MATCH",
+            "centroid": {
+                "x": 443,
+                "y": 644
+            }
+        },
+        {
+            "contour_id": 22,
+            "shape_type": "polygon",
+            "circularity": 0.4873,
+            "solidity": 0.8718,
+            "eq_diameter_px": 21.92,
+            "eq_diameter_mm": 4.013,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.013,
+            "status": "MATCH",
+            "centroid": {
+                "x": 438,
+                "y": 888
+            }
+        },
+        {
+            "contour_id": 23,
+            "shape_type": "polygon",
+            "circularity": 0.5272,
+            "solidity": 0.8886,
+            "eq_diameter_px": 33.79,
+            "eq_diameter_mm": 6.186,
+            "matched_ocr_dia": 7.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.814,
+            "status": "MATCH",
+            "centroid": {
+                "x": 387,
+                "y": 881
+            }
+        },
+        {
+            "contour_id": 24,
+            "shape_type": "ellipse",
+            "circularity": 0.7951,
+            "solidity": 0.9525,
+            "eq_diameter_px": 15.57,
+            "eq_diameter_mm": 2.851,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 361,
+                "y": 861
+            }
+        },
+        {
+            "contour_id": 25,
+            "shape_type": "ellipse",
+            "circularity": 0.6875,
+            "solidity": 0.9316,
+            "eq_diameter_px": 19.98,
+            "eq_diameter_mm": 3.657,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.343,
+            "status": "MATCH",
+            "centroid": {
+                "x": 418,
+                "y": 787
+            }
+        },
+        {
+            "contour_id": 26,
+            "shape_type": "ellipse",
+            "circularity": 0.7084,
+            "solidity": 0.9175,
+            "eq_diameter_px": 17.44,
+            "eq_diameter_mm": 3.193,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 451,
+                "y": 775
+            }
+        },
+        {
+            "contour_id": 27,
+            "shape_type": "ellipse",
+            "circularity": 0.8237,
+            "solidity": 0.9545,
+            "eq_diameter_px": 10.34,
+            "eq_diameter_mm": 1.893,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.107,
+            "status": "MATCH",
+            "centroid": {
+                "x": 407,
+                "y": 769
+            }
+        },
+        {
+            "contour_id": 28,
+            "shape_type": "ellipse",
+            "circularity": 0.822,
+            "solidity": 0.9524,
+            "eq_diameter_px": 10.09,
+            "eq_diameter_mm": 1.847,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.153,
+            "status": "MATCH",
+            "centroid": {
+                "x": 262,
+                "y": 758
+            }
+        },
+        {
+            "contour_id": 29,
+            "shape_type": "polygon",
+            "circularity": 0.4809,
+            "solidity": 0.8267,
+            "eq_diameter_px": 22.79,
+            "eq_diameter_mm": 4.172,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.172,
+            "status": "MATCH",
+            "centroid": {
+                "x": 461,
+                "y": 755
+            }
+        },
+        {
+            "contour_id": 31,
+            "shape_type": "ellipse",
+            "circularity": 0.8237,
+            "solidity": 0.9545,
+            "eq_diameter_px": 10.34,
+            "eq_diameter_mm": 1.893,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.107,
+            "status": "MATCH",
+            "centroid": {
+                "x": 324,
+                "y": 736
+            }
+        },
+        {
+            "contour_id": 35,
+            "shape_type": "ellipse",
+            "circularity": 0.6676,
+            "solidity": 0.913,
+            "eq_diameter_px": 17.15,
+            "eq_diameter_mm": 3.139,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 590,
+                "y": 695
+            }
+        },
+        {
+            "contour_id": 37,
+            "shape_type": "ellipse",
+            "circularity": 0.8254,
+            "solidity": 0.9608,
+            "eq_diameter_px": 11.17,
+            "eq_diameter_mm": 2.045,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.045,
+            "status": "MATCH",
+            "centroid": {
+                "x": 537,
+                "y": 686
+            }
+        },
+        {
+            "contour_id": 38,
+            "shape_type": "polygon",
+            "circularity": 0.4891,
+            "solidity": 0.8446,
+            "eq_diameter_px": 22.78,
+            "eq_diameter_mm": 4.169,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.169,
+            "status": "MATCH",
+            "centroid": {
+                "x": 564,
+                "y": 691
+            }
+        },
+        {
+            "contour_id": 39,
+            "shape_type": "ellipse",
+            "circularity": 0.725,
+            "solidity": 0.9471,
+            "eq_diameter_px": 18.8,
+            "eq_diameter_mm": 3.441,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 520,
+                "y": 682
+            }
+        },
+        {
+            "contour_id": 40,
+            "shape_type": "ellipse",
+            "circularity": 0.8237,
+            "solidity": 0.9545,
+            "eq_diameter_px": 10.34,
+            "eq_diameter_mm": 1.893,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.107,
+            "status": "MATCH",
+            "centroid": {
+                "x": 532,
+                "y": 668
+            }
+        },
+        {
+            "contour_id": 42,
+            "shape_type": "polygon",
+            "circularity": 0.5483,
+            "solidity": 0.8894,
+            "eq_diameter_px": 15.35,
+            "eq_diameter_mm": 2.809,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 520,
+                "y": 657
+            }
+        },
+        {
+            "contour_id": 43,
+            "shape_type": "polygon",
+            "circularity": 0.6047,
+            "solidity": 0.9375,
+            "eq_diameter_px": 16.06,
+            "eq_diameter_mm": 2.939,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 296,
+                "y": 655
+            }
+        },
+        {
+            "contour_id": 44,
+            "shape_type": "ellipse",
+            "circularity": 0.7496,
+            "solidity": 0.9393,
+            "eq_diameter_px": 15.05,
+            "eq_diameter_mm": 2.756,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 577,
+                "y": 642
+            }
+        },
+        {
+            "contour_id": 45,
+            "shape_type": "ellipse",
+            "circularity": 0.8401,
+            "solidity": 0.961,
+            "eq_diameter_px": 11.2,
+            "eq_diameter_mm": 2.05,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.05,
+            "status": "MATCH",
+            "centroid": {
+                "x": 518,
+                "y": 637
+            }
+        },
+        {
+            "contour_id": 46,
+            "shape_type": "polygon",
+            "circularity": 0.5488,
+            "solidity": 0.8891,
+            "eq_diameter_px": 16.91,
+            "eq_diameter_mm": 3.095,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 312,
+                "y": 639
+            }
+        },
+        {
+            "contour_id": 47,
+            "shape_type": "ellipse",
+            "circularity": 0.8092,
+            "solidity": 0.9459,
+            "eq_diameter_px": 9.44,
+            "eq_diameter_mm": 1.728,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.272,
+            "status": "MATCH",
+            "centroid": {
+                "x": 576,
+                "y": 626
+            }
+        },
+        {
+            "contour_id": 48,
+            "shape_type": "ellipse",
+            "circularity": 0.7905,
+            "solidity": 0.96,
+            "eq_diameter_px": 14.09,
+            "eq_diameter_mm": 2.58,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 585,
+                "y": 622
+            }
+        },
+        {
+            "contour_id": 49,
+            "shape_type": "ellipse",
+            "circularity": 0.8343,
+            "solidity": 0.9627,
+            "eq_diameter_px": 12.15,
+            "eq_diameter_mm": 2.224,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.224,
+            "status": "MATCH",
+            "centroid": {
+                "x": 307,
+                "y": 615
+            }
+        },
+        {
+            "contour_id": 50,
+            "shape_type": "polygon",
+            "circularity": 0.5992,
+            "solidity": 0.9437,
+            "eq_diameter_px": 19.87,
+            "eq_diameter_mm": 3.636,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.364,
+            "status": "MATCH",
+            "centroid": {
+                "x": 295,
+                "y": 625
+            }
+        },
+        {
+            "contour_id": 51,
+            "shape_type": "ellipse",
+            "circularity": 0.822,
+            "solidity": 0.9524,
+            "eq_diameter_px": 10.09,
+            "eq_diameter_mm": 1.847,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.153,
+            "status": "MATCH",
+            "centroid": {
+                "x": 574,
+                "y": 609
+            }
+        },
+        {
+            "contour_id": 52,
+            "shape_type": "ellipse",
+            "circularity": 0.8323,
+            "solidity": 0.9615,
+            "eq_diameter_px": 11.97,
+            "eq_diameter_mm": 2.191,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.191,
+            "status": "MATCH",
+            "centroid": {
+                "x": 320,
+                "y": 604
+            }
+        },
+        {
+            "contour_id": 54,
+            "shape_type": "ellipse",
+            "circularity": 0.8377,
+            "solidity": 0.9624,
+            "eq_diameter_px": 11.42,
+            "eq_diameter_mm": 2.091,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.091,
+            "status": "MATCH",
+            "centroid": {
+                "x": 309,
+                "y": 592
+            }
+        },
+        {
+            "contour_id": 55,
+            "shape_type": "ellipse",
+            "circularity": 0.8356,
+            "solidity": 0.9596,
+            "eq_diameter_px": 11.0,
+            "eq_diameter_mm": 2.013,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.013,
+            "status": "MATCH",
+            "centroid": {
+                "x": 503,
+                "y": 591
+            }
+        },
+        {
+            "contour_id": 56,
+            "shape_type": "ellipse",
+            "circularity": 0.8282,
+            "solidity": 0.9624,
+            "eq_diameter_px": 18.93,
+            "eq_diameter_mm": 3.465,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 678,
+                "y": 589
+            }
+        },
+        {
+            "contour_id": 57,
+            "shape_type": "ellipse",
+            "circularity": 0.8356,
+            "solidity": 0.9596,
+            "eq_diameter_px": 11.0,
+            "eq_diameter_mm": 2.013,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.013,
+            "status": "MATCH",
+            "centroid": {
+                "x": 543,
+                "y": 584
+            }
+        },
+        {
+            "contour_id": 59,
+            "shape_type": "ellipse",
+            "circularity": 0.8092,
+            "solidity": 0.9459,
+            "eq_diameter_px": 9.44,
+            "eq_diameter_mm": 1.728,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.272,
+            "status": "MATCH",
+            "centroid": {
+                "x": 530,
+                "y": 579
+            }
+        },
+        {
+            "contour_id": 60,
+            "shape_type": "ellipse",
+            "circularity": 0.7602,
+            "solidity": 0.947,
+            "eq_diameter_px": 12.62,
+            "eq_diameter_mm": 2.309,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 483,
+                "y": 578
+            }
+        },
+        {
+            "contour_id": 61,
+            "shape_type": "polygon",
+            "circularity": 0.6075,
+            "solidity": 0.9547,
+            "eq_diameter_px": 56.66,
+            "eq_diameter_mm": 10.37,
+            "matched_ocr_dia": 10.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.37,
+            "status": "MATCH",
+            "centroid": {
+                "x": 441,
+                "y": 591
+            }
+        },
+        {
+            "contour_id": 63,
+            "shape_type": "ellipse",
+            "circularity": 0.739,
+            "solidity": 0.9184,
+            "eq_diameter_px": 19.3,
+            "eq_diameter_mm": 3.532,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.468,
+            "status": "MATCH",
+            "centroid": {
+                "x": 321,
+                "y": 576
+            }
+        },
+        {
+            "contour_id": 65,
+            "shape_type": "ellipse",
+            "circularity": 0.7456,
+            "solidity": 0.9481,
+            "eq_diameter_px": 23.14,
+            "eq_diameter_mm": 4.235,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.235,
+            "status": "MATCH",
+            "centroid": {
+                "x": 688,
+                "y": 569
+            }
+        },
+        {
+            "contour_id": 66,
+            "shape_type": "ellipse",
+            "circularity": 0.7077,
+            "solidity": 0.9012,
+            "eq_diameter_px": 18.51,
+            "eq_diameter_mm": 3.387,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 554,
+                "y": 567
+            }
+        },
+        {
+            "contour_id": 67,
+            "shape_type": "ellipse",
+            "circularity": 0.8401,
+            "solidity": 0.961,
+            "eq_diameter_px": 11.2,
+            "eq_diameter_mm": 2.05,
+            "matched_ocr_dia": 2.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.05,
+            "status": "MATCH",
+            "centroid": {
+                "x": 575,
+                "y": 551
+            }
+        },
+        {
+            "contour_id": 68,
+            "shape_type": "ellipse",
+            "circularity": 0.8131,
+            "solidity": 0.9592,
+            "eq_diameter_px": 13.96,
+            "eq_diameter_mm": 2.555,
+            "matched_ocr_dia": null,
+            "ocr_feature_info": null,
+            "error_mm": null,
+            "status": "UNMATCHED",
+            "centroid": {
+                "x": 677,
+                "y": 549
+            }
+        },
+        {
+            "contour_id": 69,
+            "shape_type": "ellipse",
+            "circularity": 0.7131,
+            "solidity": 0.945,
+            "eq_diameter_px": 22.67,
+            "eq_diameter_mm": 4.149,
+            "matched_ocr_dia": 4.0,
+            "ocr_feature_info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            },
+            "error_mm": 0.149,
+            "status": "MATCH",
+            "centroid": {
+                "x": 340,
+                "y": 545
+            }
+        }
+    ],
+    "missing_ocr": [
+        {
+            "diameter": 80.0,
+            "info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            }
+        },
+        {
+            "diameter": 5.0,
+            "info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            }
+        },
+        {
+            "diameter": 60.0,
+            "info": {
+                "source": "hole",
+                "through": false,
+                "depth": null
+            }
+        },
+        {
+            "diameter": 5.2,
+            "info": {
+                "source": "hole_pattern (2x)",
+                "through": false,
+                "depth": 44.0
+            }
+        }
+    ]
+}

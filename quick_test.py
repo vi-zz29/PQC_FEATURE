@@ -131,35 +131,7 @@ def preprocess_real(img: np.ndarray) -> tuple:
     return real_edges, mask, real_masked, gradient
 
 
-def print_result(name: str, result, rank: int = None):
-
-    prefix = (
-        f"  {name}"
-        if rank == 1
-        else f"  {rank}. {name}"
-        if rank
-        else f"   {name}"
-    )
-
-    print(f"\n{prefix}")
-
-    print(f"   Coverage:        {result.coverage:.4f}  ({result.coverage:.1%})")
-
-    print(f"   Alignment Score: {result.alignment_score:.4f}")
-
-    print(f"   Strategy:        {result.strategy}")
-
-    if result.inlier_ratio:
-        print(f"   Inlier Ratio:    {result.inlier_ratio:.2%}")
-
-
 def main():
-
-    print("=" * 70)
-
-    print("Quick Alignment Test")
-
-    print("=" * 70)
 
     multi_mode = False
 
@@ -227,27 +199,13 @@ def main():
         print(f"[FAIL] Could not load: {real_path}")
         return
 
-    print(f"   Shape: {real.shape}")
-
-    print(f"\nPreprocessing real image...")
-
     real_edges, mask, real_masked, gradient = preprocess_real(real)
 
-    print(f"   Real edges: {np.count_nonzero(real_edges)} pixels")
-
-    cv2.imwrite('debug_mask.png', mask)
-    cv2.imwrite('debug_masked_image.png', real_masked)
-    cv2.imwrite('debug_gradient.png', gradient)
-    cv2.imwrite('debug_final_edges.png', real_edges)
-
-    # --- Also save a named edge image based on sample/view mapping ---
     SAMPLE_MAP = {
-        # (cad_basename, real_basename) → output edge name
         ("cad2.png", "real2.png"):  "edges_N001_front.png",
         ("cad4.png", "real4.png"):  "edges_N001_rear.png",
         ("cad1.png", "real1.png"):  "edges_BEV820_front.png",
         ("cad3.png", "real3.png"):  "edges_BEV820_rear.png",
-        # jpeg variants
         ("cad2.png", "real2.jpeg"): "edges_N001_front.png",
         ("cad4.png", "real4.jpeg"): "edges_N001_rear.png",
         ("cad1.png", "real1.jpeg"): "edges_BEV820_front.png",
@@ -270,207 +228,49 @@ def main():
         for name, cad_path in templates_input:
 
             try:
-
                 cad_edges = preprocess_cad(cad_path)
-
                 templates.append((name, cad_edges))
-
-                print(
-                    f"   {name}: {cad_path} ({np.count_nonzero(cad_edges)} edge px)"
-                )
-
             except FileNotFoundError as e:
-
                 print(f"   [FAIL] {e}")
 
         if not templates:
             print("[FAIL] No valid templates loaded.")
             return
 
-        print(f"\nAligning {len(templates)} template(s)...")
-
-        matches = match_best_template(
-            templates,
-            real_edges
-        )
-
-        print(f"\n{'=' * 70}")
-        print("[OK] RESULTS — RANKED BY COVERAGE")
-        print(f"{'=' * 70}")
-
-        for m in matches:
-            print_result(
-                m.name,
-                m.result,
-                rank=m.rank
-            )
+        matches = match_best_template(templates, real_edges)
 
         best = matches[0]
+        status = "[OK]" if best.result.identified else "[FAIL]"
+        print(f"{status} Best match: {best.name}  coverage={best.result.coverage:.1%}  score={best.result.alignment_score:.4f}  strategy={best.result.strategy}")
 
-        print(f"\n{'=' * 70}")
-        print("Identification:")
-
-        if best.result.identified:
-
-            print(
-                f"   [OK] {best.name} identified "
-                f"(coverage {best.result.coverage:.1%})"
-            )
-
-        else:
-
-            print(
-                f"   [FAIL] Unknown — best match "
-                f"'{best.name}' only "
-                f"{best.result.coverage:.1%} coverage"
-            )
-
-        # THIN VISUALIZATION ONLY
-        real_edges_vis = cv2.Canny(
-            real_edges,
-            50,
-            150
-        )
-
-        overlay = np.zeros(
-            (*real_edges.shape, 3),
-            dtype=np.uint8
-        )
-
+        real_edges_vis = cv2.Canny(real_edges, 50, 150)
+        overlay = np.zeros((*real_edges.shape, 3), dtype=np.uint8)
         overlay[:, :, 2] = best.result.aligned_image
         overlay[:, :, 1] = real_edges_vis
-
-        cv2.imwrite(
-            'quick_overlay.png',
-            overlay
-        )
-
-        cv2.imwrite(
-            'quick_aligned.png',
-            best.result.aligned_image
-        )
-
-        print(
-            f"\nSaved overlay for best match: quick_overlay.png"
-        )
+        cv2.imwrite('quick_overlay.png', overlay)
+        cv2.imwrite('quick_aligned.png', best.result.aligned_image)
 
     else:
 
-        print(f"\nCAD image: {cad_path}")
-
         try:
-
             cad_edges = preprocess_cad(cad_path)
-
         except FileNotFoundError as e:
-
             print(f"[FAIL] {e}")
             return
 
-        print(
-            f"   CAD edges: {np.count_nonzero(cad_edges)} pixels"
-        )
+        result = align(cad_edges, real_edges)
 
-        print(f"\nRunning alignment...")
+        status = "[OK]" if result.identified else "[FAIL]"
+        print(f"{status} coverage={result.coverage:.1%}  score={result.alignment_score:.4f}  strategy={result.strategy}")
 
-        result = align(
-            cad_edges,
-            real_edges
-        )
-
-        print(f"\n{'=' * 70}")
-        print("[OK] RESULTS")
-        print(f"{'=' * 70}")
-
-        print(f"\nMetrics:")
-
-        print(f"   Strategy:        {result.strategy}")
-
-        print(
-            f"   Alignment Score: "
-            f"{result.alignment_score:.4f} (IoU)"
-        )
-
-        print(
-            f"   Coverage: "
-            f"{result.coverage:.4f} "
-            f"({result.coverage:.1%})"
-        )
-
-        print(
-            f"   High Confidence: "
-            f"{result.high_confidence}"
-        )
-
-        if result.inlier_ratio:
-            print(
-                f"   Inlier Ratio: "
-                f"{result.inlier_ratio:.2%}"
-            )
-
-        print(f"\nIdentification:")
-
-        if result.identified:
-
-            print(
-                f"   [OK] Object 1 identified "
-                f"(coverage {result.coverage:.1%})"
-            )
-
-        else:
-
-            print(
-                f"   [FAIL] Unknown "
-                f"(coverage {result.coverage:.1%})"
-            )
-
-        print(f"\nSaving results...")
-
-        cv2.imwrite(
-            'quick_cad_edges.png',
-            cad_edges
-        )
-
-        cv2.imwrite(
-            'quick_real_edges.png',
-            real_edges
-        )
-
-        cv2.imwrite(
-            'quick_aligned.png',
-            result.aligned_image
-        )
-
-        # THIN VISUALIZATION ONLY
-        real_edges_vis = cv2.Canny(
-            real_edges,
-            50,
-            150
-        )
-
-        overlay = np.zeros(
-            (*real_edges.shape, 3),
-            dtype=np.uint8
-        )
-
+        real_edges_vis = cv2.Canny(real_edges, 50, 150)
+        overlay = np.zeros((*real_edges.shape, 3), dtype=np.uint8)
         overlay[:, :, 2] = result.aligned_image
         overlay[:, :, 1] = real_edges_vis
+        cv2.imwrite('quick_overlay.png', overlay)
+        cv2.imwrite('quick_aligned.png', result.aligned_image)
 
-        cv2.imwrite(
-            'quick_overlay.png',
-            overlay
-        )
-
-        print(f"   [OK] quick_cad_edges.png")
-        print(f"   [OK] quick_real_edges.png")
-        print(f"   [OK] quick_aligned.png")
-
-        print(
-            f"   [OK] quick_overlay.png "
-            f"(Red=CAD, Green=Real, Yellow=Match)"
-        )
-
-    print(f"\n[OK] Done!")
+    print(f"[OK] Done!")
 
 
 if __name__ == "__main__":

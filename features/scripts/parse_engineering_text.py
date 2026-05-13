@@ -320,6 +320,7 @@ def extract_holes(text: str):
         })
 
     # Simple holes: Ø D [THRU | DEPTH d]
+    # Exclude anything followed by PCD, SLOTS, or that is a known body diameter
     pattern_simple = re.compile(
         r'(?<!\d[xX×]\s)Ø\s*(\d+(?:\.\d+)?)'
         r'(?:\s+(THRU|THROUGH)|\s+DEPTH\s+(\d+(?:\.\d+)?))?',
@@ -327,7 +328,11 @@ def extract_holes(text: str):
     )
     for m in pattern_simple.finditer(text):
         dia = round(float(m.group(1)), 4)
-        if dia > 500:  # sanity check
+        if dia > 500:
+            continue
+        # Skip PCD circles and slot features — not drilled holes
+        after = text[m.end():m.end() + 10].strip().upper()
+        if after.startswith("PCD") or after.startswith("SLOT"):
             continue
         through = bool(m.group(2))
         depth = float(m.group(3)) if m.group(3) else None
@@ -656,35 +661,15 @@ def main():
     with open(ocr_file, "r", encoding="utf-8") as f:
         ocr_text = f.read()
 
-    print(f"\n[INFO] Parsing: {ocr_file}")
-
     features = parse_engineering_text(ocr_text, source_file=ocr_file)
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(features, f, indent=4)
 
-    print(f"[OK]  Saved: {output_file}")
-    print("\n--- SUMMARY ---")
-    print(f"  Part Number    : {features['part_number']}")
-    print(f"  Revision       : {features['revision']}")
-    print(f"  Material       : {features['material']}")
-    print(f"  Surface Finish : {features['surface_finish']}")
-    print(f"  Units          : {features['units']}")
-    print(f"  Surface Area   : {features['surface_area']}")
-    print(f"  Metric Threads : {len(features['metric_threads'])}")
-    print(f"  UNC Threads    : {len(features['unc_threads'])}")
-    print(f"  Hole Patterns  : {len(features['hole_patterns'])}")
-    print(f"  Holes          : {len(features['holes'])}")
-    print(f"  PCD Features   : {len(features['pcd_features'])}")
-    print(f"  Slot Features  : {len(features['slot_features'])}")
-    print(f"  Radii          : {len(features['radii'])}")
-    print(f"  Chamfers       : {len(features['chamfers'])}")
-    print(f"  Fit Tolerances : {len(features['fit_tolerances'])}")
-    print(f"  Tol Groups     : {len(features['tolerance_groups'])}")
-    print(f"  Depths         : {features['depths']}")
-    print(f"  Angles         : {len(features['angles'])}")
-    print(f"  Dimensions     : {len(features['dimensions'])}")
-    print("\n[DONE] Phase 1 feature extraction complete.")
+    holes_total = len(features["hole_patterns"]) + len(features["holes"])
+    print(f"[parse_engineering_text] {features['part_number']} — "
+          f"holes={holes_total}  threads={len(features['metric_threads']) + len(features['unc_threads'])}  "
+          f"dims={len(features['dimensions'])}  radii={len(features['radii'])} → {output_file}")
 
 
 if __name__ == "__main__":

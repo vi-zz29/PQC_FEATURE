@@ -50,9 +50,6 @@ ocr_hole_diameters = sorted(set(
 
 ocr_radii = [r["radius"] for r in ocr.get("radii", [])]
 
-print(f"\n[OCR] Hole diameters : {ocr_hole_diameters}")
-print(f"[OCR] Radii          : {ocr_radii}")
-
 # =====================================================
 # STEP 2 — PREPROCESS IMAGE
 # =====================================================
@@ -303,104 +300,45 @@ def draw_annotations(img, features, match_results, scale):
 # =====================================================
 
 all_results = []
-all_shape_features = []
-
-SEP = "=" * 65
 
 for img_path in IMAGE_FILES:
     img_name = os.path.basename(img_path)
-    print(f"\n{SEP}")
-    print(f"IMAGE: {img_name}")
-    print(SEP)
 
     img_bgr = cv2.imread(img_path)
     if img_bgr is None:
-        print(f"  [SKIP] Cannot load: {img_path}")
+        print(f"[SKIP] Cannot load: {img_path}")
         continue
 
-    h_orig, w_orig = img_bgr.shape[:2]
-    print(f"  Original size : {w_orig} x {h_orig} px")
-
-    # Preprocess
     img_up, edges = preprocess(img_bgr)
-    h_up, w_up = edges.shape[:2]
+    h_orig, w_orig = img_bgr.shape[:2]
 
-    # Extract contours
     features = extract_contours(edges, min_area=80)
-    circles  = [f for f in features if f["circularity"] > 0.75]
-    print(f"  Total contours   : {len(features)}")
-    print(f"  Circular (>0.75) : {len(circles)}")
-
-    # Estimate scale
     scale = estimate_scale(features, ocr_hole_diameters)
-    print(f"  Estimated scale  : {f'{scale:.3f} px/mm' if scale else 'unknown'}")
-
-    # Match to OCR
     matches = match_to_ocr(features, scale, ocr_hole_diameters, ocr_radii)
     matched_count = sum(1 for m in matches if m["status"] == "MATCH")
-    print(f"  Circular matches : {matched_count}/{len(matches)}")
 
-    # Print matched features
-    for m in matches:
-        if m["status"] == "MATCH":
-            print(f"    [MATCH] contour {m['contour_id']:4d}  "
-                  f"circ={m['circularity']:.3f}  "
-                  f"Ø_px={m['eq_diameter_px']:7.1f}  "
-                  f"Ø_mm={m['eq_diameter_mm']:6.2f}  "
-                  f"→ OCR Ø{m['matched_ocr_dia']}  err={m['error_mm']}mm")
+    matched_dias = sorted(set(m["matched_ocr_dia"] for m in matches if m["matched_ocr_dia"]))
+    dias_str = ", ".join(f"Ø{d}" for d in matched_dias)
+    print(f"[{img_name}] {matched_count} matches — {dias_str}")
 
-    # Annotate and save
     vis = draw_annotations(img_up, features, matches, scale)
     out_name = f"real_annotated_{os.path.splitext(img_name)[0]}.png"
-    out_path = os.path.join(FEATURES, "outputs", out_name)
-    cv2.imwrite(out_path, vis)
-    print(f"  Saved: outputs/{out_name}")
+    cv2.imwrite(os.path.join(FEATURES, "outputs", out_name), vis)
 
     all_results.append({
         "image":           img_name,
         "size":            {"w": w_orig, "h": h_orig},
         "scale_px_per_mm": round(scale, 4) if scale else None,
         "total_contours":  len(features),
-        "circular_count":  len(circles),
+        "circular_count":  len([f for f in features if f["circularity"] > 0.75]),
         "matched_count":   matched_count,
         "matches":         matches,
     })
 
-    all_shape_features.append({
-        "image":    img_name,
-        "features": features,
-    })
-
-# =====================================================
-# STEP 8 — OVERALL SUMMARY
-# =====================================================
-
-print(f"\n{SEP}")
-print("OVERALL SUMMARY — REAL IMAGE vs OCR")
-print(SEP)
-
-total_matched = sum(r["matched_count"] for r in all_results)
-total_circular = sum(r["circular_count"] for r in all_results)
-
-for r in all_results:
-    pct = r["matched_count"] / r["circular_count"] * 100 if r["circular_count"] else 0
-    print(f"  {r['image']:20s}  scale={str(round(r['scale_px_per_mm'],2)) if r['scale_px_per_mm'] else 'N/A':8}px/mm  "
-          f"circles={r['circular_count']:3d}  matched={r['matched_count']:3d}  ({pct:.0f}%)")
-
-overall_pct = total_matched / total_circular * 100 if total_circular else 0
-print(f"\n  TOTAL  circles={total_circular}  matched={total_matched}  ({overall_pct:.1f}%)")
-print(SEP)
-
-# =====================================================
-# STEP 9 — SAVE JSON OUTPUTS
-# =====================================================
-
-with open(os.path.join(FEATURES, "outputs", "real_shape_features.json"), "w") as f:
-    json.dump(all_shape_features, f, indent=4)
-
 with open(os.path.join(FEATURES, "outputs", "real_ocr_comparison.json"), "w") as f:
     json.dump(all_results, f, indent=4)
 
-print("\n[OK] Saved: outputs/real_shape_features.json")
-print("[OK] Saved: outputs/real_ocr_comparison.json")
-print("[DONE] Real image vs OCR comparison complete.\n")
+total_matched  = sum(r["matched_count"] for r in all_results)
+total_circular = sum(r["circular_count"] for r in all_results)
+overall_pct    = total_matched / total_circular * 100 if total_circular else 0
+print(f"[real_image_compare] {total_matched}/{total_circular} total matches ({overall_pct:.0f}%) across {len(all_results)} images → real_ocr_comparison.json")

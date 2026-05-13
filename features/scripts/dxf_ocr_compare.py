@@ -1,22 +1,7 @@
-"""
-Phase 1 — DXF vs OCR Feature Comparison
-Extracts geometric features from all DXF files and compares
-them against the OCR-parsed JSON (1-02-1065-N001_parsed.json).
-
-Outputs:
-  dxf_ocr_comparison.json   — full structured result
-  Console report            — human-readable match/mismatch table
-"""
-
 import ezdxf
 import json
 import os
 import math
-from collections import defaultdict
-
-# =====================================================
-# PATHS
-# =====================================================
 
 BASE        = os.path.dirname(os.path.abspath(__file__))
 FEATURES    = os.path.dirname(BASE)
@@ -24,28 +9,13 @@ DXF_DIR     = os.path.join(FEATURES, "dxf")
 OCR_JSON    = os.path.join(FEATURES, "samples", "sample_01_N001", "1-02-1065-N001_parsed.json")
 OUTPUT_JSON = os.path.join(FEATURES, "outputs", "dxf_ocr_comparison.json")
 
-# =====================================================
-# TOLERANCE FOR NUMERIC MATCHING (mm)
-# =====================================================
+MATCH_TOL = 0.15
 
-MATCH_TOL = 0.15   # within 0.15 mm → considered a match
-
-# =====================================================
-# STEP 1 — EXTRACT DXF GEOMETRY
-# =====================================================
 
 def extract_dxf_features(dxf_path):
-    """
-    Reads a DXF file and returns:
-      circles  : list of {diameter, center_x, center_y}
-      arcs     : list of {radius, start_angle, end_angle, center_x, center_y}
-      lines    : list of {length}
-      texts    : list of str
-    """
     doc = ezdxf.readfile(dxf_path)
     msp = doc.modelspace()
 
-    # INSUNITS=4 → mm, INSUNITS=1 → inch (convert to mm)
     insunits = doc.header.get("$INSUNITS", 4)
     scale = 25.4 if insunits == 1 else 1.0
 
@@ -70,7 +40,6 @@ def extract_dxf_features(dxf_path):
             cy = round(entity.dxf.center.y * scale, 4)
             sa = round(entity.dxf.start_angle, 2)
             ea = round(entity.dxf.end_angle, 2)
-            # arc span
             span = ea - sa if ea >= sa else (360 - sa + ea)
             arcs.append({
                 "radius":      r,
@@ -106,10 +75,6 @@ def extract_dxf_features(dxf_path):
     }
 
 
-# =====================================================
-# STEP 2 — LOAD ALL DXF FILES
-# =====================================================
-
 dxf_files = [
     os.path.join(DXF_DIR, f)
     for f in sorted(os.listdir(DXF_DIR))
@@ -118,14 +83,12 @@ dxf_files = [
 
 all_dxf = [extract_dxf_features(p) for p in dxf_files]
 
-# Merge all DXF circles and arcs into one pool
 merged_circles = []
 merged_arcs    = []
 for d in all_dxf:
     merged_circles.extend(d["circles"])
     merged_arcs.extend(d["arcs"])
 
-# Unique diameters from DXF
 dxf_diameters = sorted(set(round(c["diameter"], 3) for c in merged_circles))
 dxf_radii     = sorted(set(round(a["radius"],   3) for a in merged_arcs))
 dxf_all_radii = sorted(set(
@@ -133,19 +96,11 @@ dxf_all_radii = sorted(set(
     [round(a["radius"], 3) for a in merged_arcs]
 ))
 
-# =====================================================
-# STEP 3 — LOAD OCR PARSED JSON
-# =====================================================
-
 with open(OCR_JSON, encoding="utf-8") as f:
     ocr = json.load(f)
 
-# =====================================================
-# STEP 4 — MATCHING HELPERS
-# =====================================================
 
 def find_match(value, candidates, tol=MATCH_TOL):
-    """Return closest candidate within tolerance, or None."""
     best, best_err = None, tol + 1
     for c in candidates:
         err = abs(c - value)
@@ -167,39 +122,29 @@ def match_label(err):
     return f"CLOSE ({err} mm off)"
 
 
-# =====================================================
-# STEP 5 — COMPARE HOLES
-# =====================================================
-
 hole_results = []
 
-# From OCR: simple holes
 for h in ocr.get("holes", []):
     dia = h["diameter"]
     matched, err = find_match(dia, dxf_diameters)
     hole_results.append({
-        "source":          "OCR hole",
-        "ocr_diameter":    dia,
-        "dxf_diameter":    matched,
-        "error_mm":        err,
-        "status":          match_label(err),
+        "source":       "OCR hole",
+        "ocr_diameter": dia,
+        "dxf_diameter": matched,
+        "error_mm":     err,
+        "status":       match_label(err),
     })
 
-# From OCR: hole patterns
 for hp in ocr.get("hole_patterns", []):
     dia = hp["diameter"]
     matched, err = find_match(dia, dxf_diameters)
     hole_results.append({
-        "source":          f"OCR hole_pattern ({hp['count']}x)",
-        "ocr_diameter":    dia,
-        "dxf_diameter":    matched,
-        "error_mm":        err,
-        "status":          match_label(err),
+        "source":       f"OCR hole_pattern ({hp['count']}x)",
+        "ocr_diameter": dia,
+        "dxf_diameter": matched,
+        "error_mm":     err,
+        "status":       match_label(err),
     })
-
-# =====================================================
-# STEP 6 — COMPARE RADII
-# =====================================================
 
 radius_results = []
 
@@ -207,24 +152,18 @@ for r in ocr.get("radii", []):
     rad = r["radius"]
     matched, err = find_match(rad, dxf_all_radii)
     radius_results.append({
-        "ocr_radius":  rad,
-        "dxf_radius":  matched,
-        "error_mm":    err,
-        "status":      match_label(err),
+        "ocr_radius": rad,
+        "dxf_radius": matched,
+        "error_mm":   err,
+        "status":     match_label(err),
     })
-
-# =====================================================
-# STEP 7 — COMPARE PCD
-# =====================================================
 
 pcd_results = []
 
 for p in ocr.get("pcd_features", []):
     dia = p["diameter"]
-    # PCD diameter → radius in DXF arcs
     pcd_radius = dia / 2
     matched_r, err_r = find_match(pcd_radius, dxf_all_radii)
-    # Also check direct diameter match in circles
     matched_d, err_d = find_match(dia, dxf_diameters)
 
     if err_r is not None and (err_d is None or err_r <= err_d):
@@ -255,12 +194,7 @@ for p in ocr.get("pcd_features", []):
             "status":           "NO MATCH",
         })
 
-# =====================================================
-# STEP 8 — COMPARE DIMENSIONS (general)
-# =====================================================
-
 ocr_dims = ocr.get("dimensions", [])
-# All DXF numeric values: diameters + radii*2 + line lengths
 dxf_all_dims = sorted(set(
     dxf_diameters +
     [round(r * 2, 4) for r in dxf_all_radii] +
@@ -269,7 +203,7 @@ dxf_all_dims = sorted(set(
 
 dim_results = []
 for dim in ocr_dims:
-    if dim < 0.1:   # skip pure tolerance values
+    if dim < 0.1:
         continue
     matched, err = find_match(dim, dxf_all_dims, tol=0.5)
     dim_results.append({
@@ -279,9 +213,6 @@ for dim in ocr_dims:
         "status":   match_label(err),
     })
 
-# =====================================================
-# STEP 9 — SUMMARY STATS
-# =====================================================
 
 def stats(results):
     total   = len(results)
@@ -289,6 +220,7 @@ def stats(results):
     missed  = total - matched
     pct     = matched / total * 100 if total else 0
     return total, matched, missed, round(pct, 1)
+
 
 h_total, h_match, h_miss, h_pct   = stats(hole_results)
 r_total, r_match, r_miss, r_pct   = stats(radius_results)
@@ -299,84 +231,13 @@ overall_total   = h_total + r_total + p_total + d_total
 overall_matched = h_match + r_match + p_match + d_match
 overall_pct     = overall_matched / overall_total * 100 if overall_total else 0
 
-# =====================================================
-# STEP 10 — CONSOLE REPORT
-# =====================================================
-
-SEP = "=" * 65
-
-print(f"\n{SEP}")
-print("DXF FILES LOADED")
-print(SEP)
-for d in all_dxf:
-    print(f"  {d['file']:30s}  circles={len(d['circles'])}  arcs={len(d['arcs'])}  lines={len(d['lines'])}")
-
-print(f"\n  Merged unique circle diameters : {dxf_diameters}")
-print(f"  Merged unique arc radii        : {dxf_radii}")
-
-print(f"\n{SEP}")
-print("HOLE COMPARISON  (OCR ↔ DXF)")
-print(SEP)
-for r in hole_results:
-    print(f"  {r['source']:30s}  OCR={r['ocr_diameter']:7.3f}  DXF={str(r['dxf_diameter']):7}  err={str(r['error_mm']):6}  [{r['status']}]")
-print(f"\n  Match rate: {h_match}/{h_total} ({h_pct}%)")
-
-print(f"\n{SEP}")
-print("RADIUS COMPARISON  (OCR ↔ DXF)")
-print(SEP)
-for r in radius_results:
-    print(f"  OCR R={r['ocr_radius']:6.3f}  DXF R={str(r['dxf_radius']):7}  err={str(r['error_mm']):6}  [{r['status']}]")
-print(f"\n  Match rate: {r_match}/{r_total} ({r_pct}%)")
-
-print(f"\n{SEP}")
-print("PCD COMPARISON  (OCR ↔ DXF)")
-print(SEP)
-for r in pcd_results:
-    print(f"  OCR PCD={r['ocr_pcd_diameter']:6.1f}  via {r['match_type']:15s}  DXF={str(r['dxf_value']):7}  err={str(r['error_mm']):6}  [{r['status']}]")
-print(f"\n  Match rate: {p_match}/{p_total} ({p_pct}%)")
-
-print(f"\n{SEP}")
-print("DIMENSION COMPARISON  (OCR ↔ DXF)  [tol=0.5mm]")
-print(SEP)
-for r in dim_results:
-    flag = "" if r["status"] != "NO MATCH" else "  <-- not in DXF"
-    print(f"  OCR={r['ocr_dim']:8.4f}  DXF={str(r['dxf_dim']):8}  err={str(r['error_mm']):6}  [{r['status']}]{flag}")
-print(f"\n  Match rate: {d_match}/{d_total} ({d_pct}%)")
-
-print(f"\n{SEP}")
-print("OVERALL SUMMARY")
-print(SEP)
-print(f"  Holes      : {h_match}/{h_total} matched  ({h_pct}%)")
-print(f"  Radii      : {r_match}/{r_total} matched  ({r_pct}%)")
-print(f"  PCD        : {p_match}/{p_total} matched  ({p_pct}%)")
-print(f"  Dimensions : {d_match}/{d_total} matched  ({d_pct}%)")
-print(f"\n  TOTAL      : {overall_matched}/{overall_total} matched  ({overall_pct:.1f}%)")
-print(SEP)
-
-# =====================================================
-# STEP 11 — SAVE JSON
-# =====================================================
-
-output = {
-    "dxf_files":          [d["file"] for d in all_dxf],
-    "dxf_circle_diameters": dxf_diameters,
-    "dxf_arc_radii":        dxf_radii,
-    "hole_comparison":      hole_results,
-    "radius_comparison":    radius_results,
-    "pcd_comparison":       pcd_results,
-    "dimension_comparison": dim_results,
-    "summary": {
-        "holes":      {"matched": h_match, "total": h_total, "pct": h_pct},
-        "radii":      {"matched": r_match, "total": r_total, "pct": r_pct},
-        "pcd":        {"matched": p_match, "total": p_total, "pct": p_pct},
-        "dimensions": {"matched": d_match, "total": d_total, "pct": d_pct},
-        "overall":    {"matched": overall_matched, "total": overall_total,
-                       "pct": round(overall_pct, 1)},
-    }
-}
-
 with open(OUTPUT_JSON, "w") as f:
     json.dump(output, f, indent=4)
 
-print(f"\n[OK] Saved: {OUTPUT_JSON}")
-print("[DONE] DXF vs OCR comparison complete.\n")
+detected = ", ".join([
+    f"holes {h_match}/{h_total}",
+    f"radii {r_match}/{r_total}",
+    f"pcd {p_match}/{p_total}",
+    f"dims {d_match}/{d_total}",
+])
+print(f"[dxf_ocr_compare] {overall_matched}/{overall_total} features matched ({overall_pct:.0f}%) — {detected} → {OUTPUT_JSON}")
