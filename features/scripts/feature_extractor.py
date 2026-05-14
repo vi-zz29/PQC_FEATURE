@@ -206,12 +206,17 @@ def compare_with_ocr(features: list, ocr_json_path: str, scale: float):
     with open(ocr_json_path, encoding="utf-8") as f:
         ocr = json.load(f)
 
+    # Build ocr_holes dict — one entry per unique diameter.
+    # hole_patterns take priority over plain holes for the same diameter
+    # so we don't double-count (e.g. "12x Ø5.2" and a plain "Ø5.2" are the same feature).
     ocr_holes = {}
     for h in ocr.get("holes", []):
         d = h["diameter"]
-        ocr_holes[d] = {"source": "hole", "through": h.get("through"), "depth": h.get("depth")}
+        if d not in ocr_holes:
+            ocr_holes[d] = {"source": "hole", "through": h.get("through"), "depth": h.get("depth")}
     for hp in ocr.get("hole_patterns", []):
         d = hp["diameter"]
+        # Always overwrite with the pattern entry — it carries count info and is more specific
         ocr_holes[d] = {"source": f"hole_pattern ({hp['count']}x)", "through": hp.get("through"), "depth": hp.get("depth")}
     for p in ocr.get("pcd_features", []):
         d = p["diameter"]
@@ -293,8 +298,6 @@ def compare_with_ocr(features: list, ocr_json_path: str, scale: float):
 
     return results, ocr, missing_ocr
 
-    return results, ocr, missing_ocr
-
 
 # ---------------------------------------------------------------------------
 # STEP 5: Annotated output image
@@ -343,8 +346,9 @@ def draw_annotations(img_gray, features, results, missing_ocr, scale):
 
 def print_report(label, results, missing_ocr, ocr):
     matched      = [r for r in results if r["status"] == "MATCH"]
+    # Deduplicate: a diameter in both holes and hole_patterns is one unique feature
     all_ocr_dias = set(
-        [h["diameter"] for h in ocr.get("holes", [])] +
+        [h["diameter"]  for h in ocr.get("holes", [])] +
         [hp["diameter"] for hp in ocr.get("hole_patterns", [])]
     )
     total_ocr    = len(all_ocr_dias)
